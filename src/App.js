@@ -5,12 +5,14 @@ import {
           Route, 
           Switch
         } from 'react-router-dom';
-import Location from './fragments/location/component'
+import Location from './fragments/location/location'
+import Header from './views/header/header'
 
 let App = () =>
   <Router>
-    <div>
+    <div className="app">
       <Location />
+      <Header />
       <Switch>
       </Switch>
     </div>
