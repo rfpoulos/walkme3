@@ -10,7 +10,7 @@ import Menu from '../../components/menu/menu';
 
 let headerDumb = ({ menuOpen, openClose }) =>
     <header className="header" onClick={ openClose }>
-        <Menu menuOpen={ menuOpen.toString() } />
+        <Menu menuOpen={ menuOpen } />
         <img />
     </header>
 
