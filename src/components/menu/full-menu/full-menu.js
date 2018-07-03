@@ -1,5 +1,5 @@
 import React from 'react';
-import './menu.css';
+import './style.css';
 
 let Menu = ({ menuOpen }) =>
     <ul className={menuOpen.toString()}>

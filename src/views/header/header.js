@@ -1,16 +1,16 @@
 import React from 'react';
-import './header.css';
+import './style.css';
 import { 
     withState,
     withHandlers,
     compose
 } from 'recompose';
-import Menu from '../../components/menu/menu';
+import FullMenu from '../../components/menu/full-menu/full-menu';
 
 
 let headerDumb = ({ menuOpen, openClose }) =>
     <header className="header" onClick={ openClose }>
-        <Menu menuOpen={ menuOpen } />
+        <FullMenu menuOpen={ menuOpen } />
         <img />
     </header>
 

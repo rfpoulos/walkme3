@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 import { compose, lifecycle } from 'recompose';
-import { updateCurrentLocation } from '../../actions';
+import { updateCurrentLocation } from '../../redux/actions';
 import { connect } from 'react-redux';
-import { success } from './location-functions';
+import { success } from './helpers';
 
 let LocationDumb = compose(
     lifecycle({
