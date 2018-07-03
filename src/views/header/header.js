@@ -1,27 +1,32 @@
 import React from 'react';
 import './style.css';
-import { 
-    withState,
-    withHandlers,
-    compose
-} from 'recompose';
-import FullMenu from '../../components/menu/full-menu/full-menu';
+import hamburger from '../../images/bars-solid.svg';
+import Logo from '../../components/logo/logo'
+import { updateMenuOpen } from '../../redux/actions';
+import { connect } from 'react-redux';
 
-
-let headerDumb = ({ menuOpen, openClose }) =>
-    <header className="header" onClick={ openClose }>
-        <FullMenu menuOpen={ menuOpen } />
-        <img />
+let HeaderDumb = ({ updateMenuOpen, menuOpen }) =>
+    <header className="header">
+        <img className="hamburger" src={ hamburger } 
+            onClick={ updateMenuOpen(!menuOpen) } alt="Menu"/>
+        <Logo />
     </header>
 
-let Header = compose(
-    withState('menuOpen', 'isOpen', false),
-    withHandlers({
-        openClose: ({ isOpen, menuOpen }) => () =>
-            isOpen(!menuOpen),
-        }
-    )
-)(headerDumb)
+let mapStateToProps = (state) => 
+    ({
+        menuOpen: state.menuOpen,
+    })
+
+let mapDispatchToProps = (dispatch) =>
+    ({
+        updateMenuOpen: (click) => () => dispatch(updateMenuOpen(click)),
+    })
+
+let Header = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(HeaderDumb);
+
 
 
 export default Header;

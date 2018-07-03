@@ -1,0 +1,19 @@
+.false {
+    display: none;
+}
+
+.true {
+    display: flex;
+    animation-duration: 1s;
+    animation-name: slidein;
+  }
+  
+  @keyframes slidein {
+    from {
+      margin-left: -100%;
+    }
+  
+    to {
+      margin-left: 0%;
+    }
+  }

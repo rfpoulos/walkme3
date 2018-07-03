@@ -1,5 +1,6 @@
 export const initialState = {
     currentLocation: '',
+    menuOpen: false,
 }
 
 const UPDATE_CURRENT_LOCATION = "UPDATE_CURRENT_LOCATION";
@@ -9,8 +10,16 @@ let updateCurrentLocationAction = (state, action) => {
 }
 updateCurrentLocation.toString = () => UPDATE_CURRENT_LOCATION;
 
+const UPDATE_MENU_OPEN = "UPDATE_MENU_OPEN";
+export let updateMenuOpen = (payload) => ({type: UPDATE_MENU_OPEN, payload});
+let updateMenuOpenAction = (state, action) => {
+    return ({ ...state, menuOpen: action.payload });
+}
+updateMenuOpen.toString = () => UPDATE_MENU_OPEN;
+
 let reducerHandlers = {
     [updateCurrentLocation]: updateCurrentLocationAction,
+    [updateMenuOpen]: updateMenuOpenAction,
 };
 
 export default reducerHandlers;

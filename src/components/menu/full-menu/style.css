@@ -1,9 +1,0 @@
-.true {
-    position: absolute;
-    background-color: white;
-    z-index: 1;
-}
-
-.false {
-    display: none;
-}
