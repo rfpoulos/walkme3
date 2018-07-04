@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.css';
+import helpers from './helpers';
 import hamburger from '../../images/bars-solid.svg';
 import Logo from '../../components/logo/logo'
 import { updateMenuOpen } from '../../redux/actions';

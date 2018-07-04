@@ -1,11 +1,13 @@
+ul {
+    display: none;
+}
 .false {
-    animation: slideout 250ms forwards;
+    animation: slideout 350ms forwards;
 }
 
 .true {
+    animation: slidein 350ms forwards;
     display: flex;
-    animation-duration: 250ms;
-    animation-name: slidein;
   }
   
 @keyframes slidein {
