@@ -1,14 +1,14 @@
 .false {
-    display: none;
+    animation: slideout 250ms forwards;
 }
 
 .true {
     display: flex;
-    animation-duration: 1s;
+    animation-duration: 250ms;
     animation-name: slidein;
   }
   
-  @keyframes slidein {
+@keyframes slidein {
     from {
       margin-left: -100%;
     }
@@ -17,3 +17,15 @@
       margin-left: 0%;
     }
   }
+
+@keyFrames slideout {
+    0% {
+        margin-left: 0%;
+    }
+    100% {
+        margin-left: -100%;
+        display: none;
+    }
+}
+
+  
