@@ -8,6 +8,7 @@ import {
 import Location from './fragments/location/location';
 import Header from './views/header/header';
 import Menu from './views/menu/menu';
+import SignIn from './views/sign-in/sign-in';
 
 let App = () =>
   <Router>
@@ -16,6 +17,7 @@ let App = () =>
       <Header />
       <Menu />
       <Switch>
+        <Route path="/signin" component={ SignIn } />
       </Switch>
     </div>
   </Router>

@@ -1,33 +1,31 @@
-ul {
-    display: none;
-}
 .false {
-    animation: slideout 350ms forwards;
+    animation: slideout 1 forwards;
 }
 
 .true {
-    animation: slidein 350ms forwards;
-    display: flex;
+    animation: slidein 1s forwards;
   }
   
-@keyframes slidein {
-    from {
-      margin-left: -100%;
+@keyframes 
+    slidein {
+        from {
+            height: 0;
+            overflow: hidden;
+        }
+    
+        to {
+            height: 20em;
+        }
     }
-  
-    to {
-      margin-left: 0%;
+ @keyframes   
+    slideout {
+        from {
+            height: 20em;
+        }
+        to {
+            height: 0;
+            overflow: hidden;
+        }
     }
-  }
-
-@keyFrames slideout {
-    0% {
-        margin-left: 0%;
-    }
-    100% {
-        margin-left: -100%;
-        display: none;
-    }
-}
 
   

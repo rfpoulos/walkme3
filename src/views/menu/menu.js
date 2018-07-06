@@ -1,6 +1,5 @@
 import React from 'react';
 import './style.css';
-import helpers from './helpers';
 import { connect } from 'react-redux';
 
 let MenuDumb = ({ menuOpen }) =>

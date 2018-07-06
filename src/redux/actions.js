@@ -1,6 +1,7 @@
 export const initialState = {
-    currentLocation: '',
+    currentLocation: null,
     menuOpen: false,
+    userObject: null,
 }
 
 const UPDATE_CURRENT_LOCATION = "UPDATE_CURRENT_LOCATION";
