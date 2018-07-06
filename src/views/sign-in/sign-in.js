@@ -6,7 +6,7 @@ import { compose, withState, withHandlers } from 'recompose';
 import TextInput from '../../components/text-input/text-input';
 
 let SignInDumb = ({ signInForm, handleEmail, handlePassword }) =>
-    <div className="sign-in">
+    <form className="sign-in">
         <TextInput type="text" 
             placeholder="email or username"
             value={ signInForm.identifier }
@@ -15,15 +15,15 @@ let SignInDumb = ({ signInForm, handleEmail, handlePassword }) =>
             placeholder="password"
             value={ signInForm.password }
             onChange={ handlePassword }/>
-    </div>
+    </form>
 
 let SignIn = compose(
-    withState('signInForm', 'updateInput', { identifier: '', password: '' }),
+    withState('signInForm', 'updateSignInForm', { identifier: '', password: '' }),
     withHandlers({
-        handleEmail: ({signInForm, updateInput}) => event => 
-            updateInput({...signInForm, identifier: event.target.value}),
-        handlePassword: ({signInForm, updateInput}) => event =>
-            updateInput({...signInForm, password: event.target.value})
+        handleEmail: ({signInForm, updateSignInForm}) => event => 
+            updateSignInForm({...signInForm, identifier: event.target.value}),
+        handlePassword: ({signInForm, updateSignInForm}) => event =>
+            updateSignInForm({...signInForm, password: event.target.value})
     })
 )(SignInDumb)
 
