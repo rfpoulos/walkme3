@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import { signIn } from './helpers';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { compose, withState, withHandlers } from 'recompose';
 import { updateUserObject } from '../../redux/actions';
 import TextInput from '../../components/text-input/text-input';
@@ -25,6 +25,7 @@ let SignInDumb = ({ signInForm,
             onChange={ handlePassword }/>
         <Button text="Sign In" 
             onClick={ signIn(signInForm, updateUserObject, history) } />
+        <Link to="/createaccount">New user?  Create Account.</Link>
     </div>
 
 let SignInEnhance = compose(
