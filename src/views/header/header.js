@@ -12,7 +12,7 @@ let HeaderDumb = ({ updateMenuOpen, menuOpen, userObject }) =>
             src={ hamburger } 
             onClick={ updateMenuOpen(!menuOpen) } 
             alt="Menu"/>
-        <a className={ 'sign-in ' + (isSignedIn(!userObject)).toString() }
+        <a className={ 'sign-in-text ' + (isSignedIn(!userObject)).toString() }
             href="/signin">SIGN IN</a>
         <Logo />
     </header>

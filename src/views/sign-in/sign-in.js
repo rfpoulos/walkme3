@@ -1,12 +1,20 @@
 import React from 'react';
 import './style.css';
-import helpers from './helpers';
+import { signIn } from './helpers';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { compose, withState, withHandlers } from 'recompose';
+import { updateUserObject } from '../../redux/actions';
 import TextInput from '../../components/text-input/text-input';
+import Button from '../../components/button/button';
 
-let SignInDumb = ({ signInForm, handleEmail, handlePassword }) =>
-    <form className="sign-in">
+let SignInDumb = ({ signInForm, 
+                    handleEmail, 
+                    handlePassword, 
+                    updateUserObject,
+                    history,
+                 }) =>
+    <div className="sign-in">
         <TextInput type="text" 
             placeholder="email or username"
             value={ signInForm.identifier }
@@ -15,9 +23,11 @@ let SignInDumb = ({ signInForm, handleEmail, handlePassword }) =>
             placeholder="password"
             value={ signInForm.password }
             onChange={ handlePassword }/>
-    </form>
+        <Button text="Sign In" 
+            onClick={ signIn(signInForm, updateUserObject, history) } />
+    </div>
 
-let SignIn = compose(
+let SignInEnhance = compose(
     withState('signInForm', 'updateSignInForm', { identifier: '', password: '' }),
     withHandlers({
         handleEmail: ({signInForm, updateSignInForm}) => event => 
@@ -27,4 +37,19 @@ let SignIn = compose(
     })
 )(SignInDumb)
 
-export default SignIn;
+let mapStateToProps = (state) => 
+    ({
+
+    })
+
+let mapDispatchToProps = (dispatch) =>
+    ({
+        updateUserObject: (userData) => dispatch(updateUserObject(userData)),
+    })
+
+let SignIn = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SignInEnhance);
+
+export default withRouter(SignIn);

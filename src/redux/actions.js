@@ -18,9 +18,17 @@ let updateMenuOpenAction = (state, action) => {
 }
 updateMenuOpen.toString = () => UPDATE_MENU_OPEN;
 
-let reducerHandlers = {
+const UPDATE_USER_OBJECT = "UPDATE_USER_OBJECT";
+export let updateUserObject = (payload) => ({type: UPDATE_USER_OBJECT, payload});
+let updateUserObjectAction = (state, action) => {
+    return ({ ...state, userObject: action.payload });
+}
+updateUserObject.toString = () => UPDATE_USER_OBJECT;
+
+const actions = {
     [updateCurrentLocation]: updateCurrentLocationAction,
     [updateMenuOpen]: updateMenuOpenAction,
+    [updateUserObject]: updateUserObjectAction,
 };
 
-export default reducerHandlers;
+export default actions;
