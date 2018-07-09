@@ -8,10 +8,13 @@ import { server } from '../../variables';
 
 let HeaderDumb = ({ updateMenuOpen, menuOpen, userObject }) =>
     <header className="header">
+        <div className="flex2">
         {
             isSignedIn(userObject, menuOpen, updateMenuOpen)
         }
+        </div>
         <Logo />
+        <div className="flex2"></div>
     </header>
 
 let isSignedIn = (userObject, menuOpen, updateMenuOpen) => {

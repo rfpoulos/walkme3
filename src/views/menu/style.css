@@ -1,31 +1,29 @@
 .false {
-    animation: slideout 1 forwards;
+    animation: slideout 350ms forwards;
 }
 
 .true {
-    animation: slidein 1s forwards;
+    animation: slidein 350ms forwards;
   }
   
 @keyframes 
     slidein {
         from {
-            height: 0;
-            overflow: hidden;
+            margin-left: -100%;
         }
     
         to {
-            height: 20em;
+            margin-left: 0;
         }
     }
  @keyframes   
     slideout {
         from {
-            height: 20em;
+            margin-left: 0;
         }
         to {
-            height: 0;
-            overflow: hidden;
+            margin-left: -100%;
         }
     }
-
+ 
   

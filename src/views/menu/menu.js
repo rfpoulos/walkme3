@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 let MenuDumb = ({ menuOpen, userObject }) =>
     <ul className={menuOpen.toString()}>
-        <li>{userObject.username}</li>
+        <li></li>
     </ul>
 
 let mapStateToProps = (state) => 
