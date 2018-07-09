@@ -2,14 +2,15 @@ import React from 'react';
 import './style.css';
 import { connect } from 'react-redux';
 
-let MenuDumb = ({ menuOpen }) =>
+let MenuDumb = ({ menuOpen, userObject }) =>
     <ul className={menuOpen.toString()}>
-        <li>Content!</li>
+        <li>{userObject.username}</li>
     </ul>
 
 let mapStateToProps = (state) => 
     ({
-        menuOpen: state.menuOpen
+        menuOpen: state.menuOpen,
+        userObject: state.userObject,
     })
 
 let mapDispatchToProps = (dispatch) =>
