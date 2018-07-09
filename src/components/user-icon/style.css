@@ -1,0 +1,10 @@
+.user-icon {
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+}
+
+.user-icon-container {
+    width: 3em;
+    height: 3em;
+}

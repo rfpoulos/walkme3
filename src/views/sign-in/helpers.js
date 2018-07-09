@@ -6,7 +6,7 @@ let setTokenInLocalStorage = (userData) => {
 }
 
 let fetchSignIn = (signInForm) =>
-    fetch(server + '/signin', {
+    fetch(server + 'signin', {
         method: "POST",
         body: JSON.stringify(signInForm),
         headers: new Headers ({

@@ -1,1 +1,1 @@
-export let server = 'http://localhost:5000';
+export let server = 'http://localhost:5000/';
