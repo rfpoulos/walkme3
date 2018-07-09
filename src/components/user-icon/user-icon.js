@@ -1,8 +1,8 @@
 import React from 'react';
 import './style.css';
 
-let UserIcon = ({ src, alt, onClick, className }) =>
-    <div className={ 'user-icon-container ' + className }>
+let UserIcon = ({ src, alt, onClick }) =>
+    <div className="user-icon-container">
         <img 
             className="user-icon"
             src={ src }

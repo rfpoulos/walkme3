@@ -3,20 +3,29 @@ import './style.css';
 import { connect } from 'react-redux';
 import Logo from '../../components/logo/logo'
 import { updateMenuOpen } from '../../redux/actions';
-import { isSignedIn } from './helpers';
 import UserIcon from '../../components/user-icon/user-icon';
 import { server } from '../../variables';
 
 let HeaderDumb = ({ updateMenuOpen, menuOpen, userObject }) =>
     <header className="header">
-        <UserIcon className={ isSignedIn(userObject).toString() } 
+        {
+            isSignedIn(userObject, menuOpen, updateMenuOpen)
+        }
+        <Logo />
+    </header>
+
+let isSignedIn = (userObject, menuOpen, updateMenuOpen) => {
+    if (userObject) {
+        return <UserIcon 
             src={ server + userObject.thumbnail } 
             onClick={ updateMenuOpen(!menuOpen) } 
             alt="Open menu / user image"/>
-        <a className={ 'sign-in-text ' + (isSignedIn(!userObject)).toString() }
+    } else {
+        return <a 
+            className="sign-in-text"
             href="/signin">SIGN IN</a>
-        <Logo />
-    </header>
+    }
+}
 
 let mapStateToProps = (state) => 
     ({
