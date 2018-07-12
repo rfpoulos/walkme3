@@ -10,25 +10,20 @@ let HeaderDumb = ({ updateMenuOpen, menuOpen, userObject }) =>
     <header className="header">
         <div className="flex2">
         {
-            isSignedIn(userObject, menuOpen, updateMenuOpen)
+            userObject && <UserIcon 
+                src={ server + userObject.thumbnail } 
+                onClick={ updateMenuOpen(!menuOpen) } 
+                alt="Open menu / user image"/>
+        }
+        {
+            !userObject && <a 
+                className="sign-in-text"
+                href="/signin">SIGN IN</a>
         }
         </div>
         <Logo />
         <div className="flex2"></div>
     </header>
-
-let isSignedIn = (userObject, menuOpen, updateMenuOpen) => {
-    if (userObject) {
-        return <UserIcon 
-            src={ server + userObject.thumbnail } 
-            onClick={ updateMenuOpen(!menuOpen) } 
-            alt="Open menu / user image"/>
-    } else {
-        return <a 
-            className="sign-in-text"
-            href="/signin">SIGN IN</a>
-    }
-}
 
 let mapStateToProps = (state) => 
     ({
