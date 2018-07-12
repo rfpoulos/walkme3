@@ -6,7 +6,7 @@ import { updateMenuOpen } from '../../redux/actions';
 import UserIcon from '../../components/user-icon/user-icon';
 import { server } from '../../variables';
 
-let HeaderDumb = ({ updateMenuOpen, menuOpen, userObject }) =>
+export let Header = ({ updateMenuOpen, menuOpen, userObject }) =>
     <header className="header">
         <div className="flex2">
         {
@@ -36,10 +36,10 @@ let mapDispatchToProps = (dispatch) =>
         updateMenuOpen: (click) => () => dispatch(updateMenuOpen(click)),
     })
 
-let Header = connect(
+let connect = connect(
     mapStateToProps,
     mapDispatchToProps
-)(HeaderDumb);
+);
 
 
-export default Header;
+export default connect(Header);
