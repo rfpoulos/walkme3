@@ -36,7 +36,7 @@ let mapDispatchToProps = (dispatch) =>
         updateMenuOpen: (click) => () => dispatch(updateMenuOpen(click)),
     })
 
-let connect = connect(
+export let connect = connect(
     mapStateToProps,
     mapDispatchToProps
 );
