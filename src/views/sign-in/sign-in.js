@@ -2,13 +2,20 @@ import React from 'react';
 import './style.css';
 import { signIn } from './sign-in-helpers';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
-import { compose, withState, withHandlers } from 'recompose';
+import { 
+    withRouter, 
+    Link,
+} from 'react-router-dom';
+import { 
+    compose, 
+    withState, 
+    withHandlers,
+} from 'recompose';
 import { updateUserObject } from '../../redux/actions';
 import TextInput from '../../components/text-input/text-input';
 import Button from '../../components/button/button';
 
-let SignInDumb = ({ 
+export let SignIn = ({ 
     signInForm, 
     handleEmail, 
     handlePassword, 
@@ -36,10 +43,10 @@ let mapStateToProps = (state) =>
 
 let mapDispatchToProps = (dispatch) =>
     ({
-        updateUserObject: (userData) => dispatch(updateUserObject(userData)),
+        updateUserObject
     })
 
-let SignIn = compose(
+export let enhance = compose(
     connect(
         mapStateToProps,
         mapDispatchToProps
@@ -62,7 +69,7 @@ let SignIn = compose(
                 password: event.target.value
             }),
     })
-)(SignInDumb)
+)
 
 
-export default SignIn;
+export default enhance(SignIn);

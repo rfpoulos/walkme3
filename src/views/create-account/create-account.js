@@ -6,7 +6,11 @@ import {
     withRouter,
     Link,
 } from 'react-router-dom';
-import { compose, withState, withHandlers } from 'recompose';
+import { 
+    compose, 
+    withState, 
+    withHandlers,
+} from 'recompose';
 import { updateUserObject } from '../../redux/actions';
 import TextInput from '../../components/text-input/text-input';
 import Button from '../../components/button/button';
