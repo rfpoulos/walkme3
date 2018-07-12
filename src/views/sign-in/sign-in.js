@@ -29,7 +29,22 @@ let SignInDumb = ({
         <Link to="/createaccount">New user?  Create Account.</Link>
     </div>
 
-let SignInEnhance = compose(
+let mapStateToProps = (state) => 
+    ({
+
+    })
+
+let mapDispatchToProps = (dispatch) =>
+    ({
+        updateUserObject: (userData) => dispatch(updateUserObject(userData)),
+    })
+
+let SignIn = compose(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    ),
+    withRouter,
     withState(
         'signInForm', 
         'updateSignInForm', 
@@ -49,19 +64,5 @@ let SignInEnhance = compose(
     })
 )(SignInDumb)
 
-let mapStateToProps = (state) => 
-    ({
 
-    })
-
-let mapDispatchToProps = (dispatch) =>
-    ({
-        updateUserObject: (userData) => dispatch(updateUserObject(userData)),
-    })
-
-let SignIn = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SignInEnhance);
-
-export default withRouter(SignIn);
+export default SignIn;
