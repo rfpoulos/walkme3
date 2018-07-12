@@ -1,11 +1,12 @@
 # WalkMe3
 This is walking tour app that allows guides to upload walks that walkers can then search for.  This project is a major refactor of the project found here: https://github.com/rfpoulos/walkmereact.  The same node server from that project will be used, found here: https://github.com/rfpoulos/walkmenode.
-
+## Features
+## Design 
 The general design principle is to only use and manipulate state at the view level. All components within a view should only accept props and have no ablity to manpulate its own props.  There is a redux store, but as opposed to storing all the state for the entire app in the store, only information that is shared amoungst multiple views is going to be stored in redux. This will make the redux store more readable and manageable.
 
 All components are to be styled locally in order to keep styling consistant across the app if components are used in multiple places.
 
-## Design Flowchart
+### Design Flowchart
 
 The goal is to start with the smallest possible solution, and "level-up" as other functionality is needed.
 
