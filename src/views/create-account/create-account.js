@@ -36,7 +36,22 @@ let CreateAccountDumb = ({
         <Link to="/signin">Already a user?  Sign in here.</Link>
     </div>
 
-let CreateAccountEnhance = compose(
+let mapStateToProps = (state) => 
+    ({
+
+    })
+
+let mapDispatchToProps = (dispatch) =>
+    ({
+        updateUserObject: (userData) => dispatch(updateUserObject(userData)),
+    })
+
+let CreateAccount = compose(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    ),
+    withRouter,
     withState(
         'createAccountForm',
         'updateCreateAccountForm',
@@ -60,21 +75,6 @@ let CreateAccountEnhance = compose(
                 password: event.target.value
             })
     })
-)(CreateAccountDumb)
+)(CreateAccountDumb);
 
-let mapStateToProps = (state) => 
-    ({
-
-    })
-
-let mapDispatchToProps = (dispatch) =>
-    ({
-        updateUserObject: (userData) => dispatch(updateUserObject(userData)),
-    })
-
-let CreateAccount = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CreateAccountEnhance);
-
-export default withRouter(CreateAccount);
+export default CreateAccount;
