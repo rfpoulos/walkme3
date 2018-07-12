@@ -18,7 +18,7 @@ export let createAccount = (createAccountForm, updateUserObject, history) =>
             await signIn({
                 identifier: createAccountForm.email,
                 password: createAccountForm.password
-            }, updateUserObject, history)
+            }, updateUserObject, history)()
         } catch(err) {
             console.log(err)
         }

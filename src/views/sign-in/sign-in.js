@@ -25,7 +25,7 @@ let SignInDumb = ({
             value={ signInForm.password }
             onChange={ handlePassword }/>
         <Button text="Sign In" 
-            onClick={ () => signIn(signInForm, updateUserObject, history) } />
+            onClick={ signIn(signInForm, updateUserObject, history) } />
         <Link to="/createaccount">New user?  Create Account.</Link>
     </div>
 

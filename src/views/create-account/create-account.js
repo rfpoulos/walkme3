@@ -2,13 +2,16 @@ import React from 'react';
 import './style.css';
 import { createAccount } from './create-account-helpers';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import {
+    withRouter,
+    Link,
+} from 'react-router-dom';
 import { compose, withState, withHandlers } from 'recompose';
 import { updateUserObject } from '../../redux/actions';
 import TextInput from '../../components/text-input/text-input';
 import Button from '../../components/button/button';
 
-let CreateAccountDumb = ({ 
+export let CreateAccount = ({ 
     createAccountForm,
     handleUsername, 
     handleEmail, 
@@ -46,7 +49,7 @@ let mapDispatchToProps = (dispatch) =>
         updateUserObject: (userData) => dispatch(updateUserObject(userData)),
     })
 
-let CreateAccount = compose(
+export let enhance = compose(
     connect(
         mapStateToProps,
         mapDispatchToProps
@@ -75,6 +78,6 @@ let CreateAccount = compose(
                 password: event.target.value
             })
     })
-)(CreateAccountDumb);
+)
 
-export default CreateAccount;
+export default enhance(CreateAccount);
