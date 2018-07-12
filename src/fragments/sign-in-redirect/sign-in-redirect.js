@@ -7,7 +7,6 @@ let SignInRedirectDumb = compose(
     lifecycle({
         componentDidMount() {
             if (!this.props.userObject) {
-                console.log(this.props.history);
                 this.props.history.push('/signin')
             }
         },

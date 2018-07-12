@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import { signIn } from './helpers';
+import { signIn } from './sign-in-helpers';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { compose, withState, withHandlers } from 'recompose';
@@ -8,33 +8,44 @@ import { updateUserObject } from '../../redux/actions';
 import TextInput from '../../components/text-input/text-input';
 import Button from '../../components/button/button';
 
-let SignInDumb = ({ signInForm, 
-                    handleEmail, 
-                    handlePassword, 
-                    updateUserObject,
-                    history,
-                 }) =>
+let SignInDumb = ({ 
+    signInForm, 
+    handleEmail, 
+    handlePassword, 
+    updateUserObject,
+    history,
+}) =>
     <div className="sign-in">
         <TextInput type="text" 
-            placeholder="email or username"
+            placeholder="Email or Username"
             value={ signInForm.identifier }
             onChange={ handleEmail }/>
         <TextInput type="password"
-            placeholder="password"
+            placeholder="Password"
             value={ signInForm.password }
             onChange={ handlePassword }/>
         <Button text="Sign In" 
-            onClick={ signIn(signInForm, updateUserObject, history) } />
+            onClick={ () => signIn(signInForm, updateUserObject, history) } />
         <Link to="/createaccount">New user?  Create Account.</Link>
     </div>
 
 let SignInEnhance = compose(
-    withState('signInForm', 'updateSignInForm', { identifier: '', password: '' }),
+    withState(
+        'signInForm', 
+        'updateSignInForm', 
+        { identifier: '', password: '' }
+    ),
     withHandlers({
-        handleEmail: ({signInForm, updateSignInForm}) => event => 
-            updateSignInForm({...signInForm, identifier: event.target.value}),
-        handlePassword: ({signInForm, updateSignInForm}) => event =>
-            updateSignInForm({...signInForm, password: event.target.value})
+        handleEmail: ({signInForm, updateSignInForm}) => 
+            event => updateSignInForm({
+                ...signInForm, 
+                identifier: event.target.value
+            }),
+        handlePassword: ({signInForm, updateSignInForm}) => 
+            event => updateSignInForm({
+                ...signInForm, 
+                password: event.target.value
+            }),
     })
 )(SignInDumb)
 

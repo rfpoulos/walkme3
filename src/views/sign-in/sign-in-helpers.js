@@ -14,8 +14,7 @@ let fetchSignIn = (signInForm) =>
             })
     })
     .then(res => res.json())
-
-export let signIn = (signInForm, updateUserObject, history) => async () => {
+export let signIn = async (signInForm, updateUserObject, history) => {
     let userData = await fetchSignIn(signInForm)
     setTokenInLocalStorage(userData);
     updateUserObject(userData);

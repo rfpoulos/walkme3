@@ -2,13 +2,13 @@ import { Fragment } from 'react';
 import { compose, lifecycle } from 'recompose';
 import { updateCurrentLocation } from '../../redux/actions';
 import { connect } from 'react-redux';
-import helpers from './helpers';
+import { success } from './location-helpers';
 
 let LocationDumb = compose(
     lifecycle({
         componentDidMount() {
             window.navigator.geolocation.watchPosition((pos) => 
-                helpers.success(pos, this.props.updateCurrentLocation));
+                success(pos, this.props.updateCurrentLocation));
             
         }
     }),

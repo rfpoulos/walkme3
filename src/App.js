@@ -10,6 +10,7 @@ import Header from './views/header/header';
 import Menu from './views/menu/menu';
 import SignIn from './views/sign-in/sign-in';
 import SignInRedirect from './fragments/sign-in-redirect/sign-in-redirect';
+import CreateAccount from './views/create-account/create-account';
 
 let App = () =>
   <Router>
@@ -20,6 +21,7 @@ let App = () =>
       <Menu />
       <Switch>
         <Route path="/signin" component={ SignIn } />
+        <Route path="/createaccount" component={ CreateAccount } />
       </Switch>
     </div>
   </Router>

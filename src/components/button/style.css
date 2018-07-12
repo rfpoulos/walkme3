@@ -22,7 +22,7 @@
 	padding:6px 24px;
 	text-decoration:none;
     text-shadow:0px 1px 0px #ffffff;
-    width: 10em;
+    width: 12em;
 }
 .button:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
