@@ -36,10 +36,10 @@ let mapDispatchToProps = (dispatch) =>
         updateMenuOpen: (click) => () => dispatch(updateMenuOpen(click)),
     })
 
-export let connect = connect(
+let enhance = connect(
     mapStateToProps,
     mapDispatchToProps
 );
 
 
-export default connect(Header);
+export default enhance(Header);
