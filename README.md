@@ -3,6 +3,7 @@ This is walking tour app that allows guides to upload walks that walkers can the
 ## Features
 ### Sign In/Logout
 ### Create Account
+### Menu Navigation
 ### View/Edit Profile
 ### Search for Walks
 ### View/Start Walk
