@@ -27,31 +27,33 @@ export let CreateAccount = ({
         <TextInput type="email" 
             placeholder="Email"
             value={ createAccountForm.email }
-            onChange={ handleEmail }/>
+            onChange={ handleEmail }
+        />
         <TextInput type="text" 
             placeholder="Username"
             value={ createAccountForm.username }
-            onChange={ handleUsername }/>
+            onChange={ handleUsername }
+        />
         <TextInput type="password"
             placeholder="Password"
             value={ createAccountForm.password }
-            onChange={ handlePassword }/>
+            onChange={ handlePassword }
+        />
         <Button text="Create Account" 
             onClick={ 
                 createAccount(createAccountForm, updateUserObject, history)
-                } />
+        } />
         <Link to="/signin">Already a user?  Sign in here.</Link>
     </div>
 
 let mapStateToProps = (state) => 
     ({
 
-    })
+    });
 
-let mapDispatchToProps = (dispatch) =>
-    ({
-        updateUserObject: (userData) => dispatch(updateUserObject(userData)),
-    })
+let mapDispatchToProps = {
+        updateUserObject,
+    };
 
 export let enhance = compose(
     connect(
@@ -65,23 +67,31 @@ export let enhance = compose(
         { email: '', password: '', username: '' }
     ),
     withHandlers({
-        handleEmail: ({ createAccountForm, updateCreateAccountForm }) => 
-            event => 
+        handleEmail:({ 
+                createAccountForm, 
+                updateCreateAccountForm,
+            }) => event => 
                 updateCreateAccountForm({
-                ...createAccountForm, 
-                email: event.target.value
+                    ...createAccountForm, 
+                    email: event.target.value
             }),
-        handleUsername: ({ createAccountForm, updateCreateAccountForm }) => 
-            event => updateCreateAccountForm({
-                ...createAccountForm,
-                username: event.target.value
+        handleUsername: ({ 
+                createAccountForm, 
+                updateCreateAccountForm,
+            }) => event => 
+                updateCreateAccountForm({
+                    ...createAccountForm,
+                    username: event.target.value
             }),
-        handlePassword: ({ createAccountForm, updateCreateAccountForm }) =>
-            event => updateCreateAccountForm({
-                ...createAccountForm, 
-                password: event.target.value
-            })
-    })
-)
+        handlePassword: ({ 
+                createAccountForm, 
+                updateCreateAccountForm,
+            }) => event => 
+                updateCreateAccountForm({
+                    ...createAccountForm, 
+                    password: event.target.value
+            }),
+    }),
+);
 
 export default enhance(CreateAccount);

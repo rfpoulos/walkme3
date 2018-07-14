@@ -3,7 +3,10 @@ import './style.css';
 import { server } from '../../variables';
 import UserIcon from '../user-icon/user-icon';
 
-let WalkCard = ({ walk, location }) => 
+let WalkCard = ({ 
+    walk, 
+    location, 
+}) => 
     <div className="walk-card">
         <div className="walk-img-container">
             <img src={ server + walk.thumbnail }

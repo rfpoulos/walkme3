@@ -6,17 +6,24 @@ import { updateMenuOpen } from '../../redux/actions';
 import UserIcon from '../../components/user-icon/user-icon';
 import { server } from '../../variables';
 
-export let Header = ({ updateMenuOpen, menuOpen, userObject }) =>
+export let Header = ({ 
+    updateMenuOpen, 
+    menuOpen, 
+    userObject,
+}) =>
     <header className="header">
         {
-            userObject && <UserIcon 
+            userObject && 
+            <UserIcon 
                 src={ server + userObject.thumbnail } 
                 onClick={ updateMenuOpen(!menuOpen) } 
-                alt="Open menu / user image"/>
+                alt="Open menu / user image"
+            />
         }
         <Logo />
         {
-            userObject && <div className="padding"></div>
+            userObject && 
+            <div className="padding"></div>
         }
     </header>
 
@@ -24,14 +31,13 @@ let mapStateToProps = (state) =>
     ({
         menuOpen: state.menuOpen,
         userObject: state.userObject,
-    })
+    });
 
-let mapDispatchToProps = (dispatch) =>
-    ({
-        updateMenuOpen: (click) => () => dispatch(updateMenuOpen(click)),
-    })
+let mapDispatchToProps = {
+        updateMenuOpen,
+    };
 
-let enhance = connect(
+export let enhance = connect(
     mapStateToProps,
     mapDispatchToProps
 );

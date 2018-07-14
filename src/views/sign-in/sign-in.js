@@ -26,13 +26,16 @@ export let SignIn = ({
         <TextInput type="text" 
             placeholder="Email or Username"
             value={ signInForm.identifier }
-            onChange={ handleEmail }/>
+            onChange={ handleEmail }
+        />
         <TextInput type="password"
             placeholder="Password"
             value={ signInForm.password }
-            onChange={ handlePassword }/>
+            onChange={ handlePassword }
+        />
         <Button text="Sign In" 
-            onClick={ signIn(signInForm, updateUserObject, history) } />
+            onClick={ signIn(signInForm, updateUserObject, history) }
+        />
         <Link to="/createaccount">New user?  Create Account.</Link>
     </div>
 
@@ -41,10 +44,9 @@ let mapStateToProps = (state) =>
 
     })
 
-let mapDispatchToProps = (dispatch) =>
-    ({
-        updateUserObject: (userObject) => dispatch(updateUserObject(userObject)),
-    })
+let mapDispatchToProps = {
+        updateUserObject,
+    }
 
 export let enhance = compose(
     connect(
@@ -58,15 +60,21 @@ export let enhance = compose(
         { identifier: '', password: '' }
     ),
     withHandlers({
-        handleEmail: ({signInForm, updateSignInForm}) => 
-            event => updateSignInForm({
-                ...signInForm, 
-                identifier: event.target.value
+        handleEmail: ({
+                signInForm, 
+                updateSignInForm,
+            }) => event => 
+                updateSignInForm({
+                    ...signInForm, 
+                    identifier: event.target.value
             }),
-        handlePassword: ({signInForm, updateSignInForm}) => 
-            event => updateSignInForm({
-                ...signInForm, 
-                password: event.target.value
+        handlePassword: ({
+                signInForm, 
+                updateSignInForm,
+            }) => event => 
+                updateSignInForm({
+                    ...signInForm, 
+                    password: event.target.value
             }),
     })
 )

@@ -13,10 +13,12 @@ let fetchSignIn = (signInForm) =>
             "Content-Type": "application/json",
             })
     })
-    .then(res => res.json())
-export let signIn = (signInForm, updateUserObject, history) => async() => {
-    let userData = await fetchSignIn(signInForm)
-    setTokenInLocalStorage(userData);
-    updateUserObject(userData);
-    history.push('/walks');
-}
+    .then(res => res.json());
+    
+export let signIn = (signInForm, updateUserObject, history) => 
+    async() => {
+        let userData = await fetchSignIn(signInForm)
+        setTokenInLocalStorage(userData);
+        updateUserObject(userData);
+        history.push('/walks');
+    };

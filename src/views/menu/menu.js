@@ -2,7 +2,10 @@ import React from 'react';
 import './style.css';
 import { connect } from 'react-redux';
 
-let MenuDumb = ({ menuOpen, userObject }) =>
+let MenuDumb = ({ 
+    menuOpen, 
+    userObject, 
+}) =>
     <ul className={menuOpen.toString()}>
         <li></li>
     </ul>
