@@ -1,29 +1,20 @@
 .false {
-    animation: slideout 350ms forwards;
+    display: none;
 }
 
 .true {
-    animation: slidein 350ms forwards;
-  }
-  
-@keyframes 
-    slidein {
-        from {
-            margin-left: -100%;
-        }
-    
-        to {
-            margin-left: 0;
-        }
-    }
- @keyframes   
-    slideout {
-        from {
-            margin-left: 0;
-        }
-        to {
-            margin-left: -100%;
-        }
-    }
- 
-  
+    display: flex;
+    flex-flow: row wrap;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+    width: 100%;
+}
+

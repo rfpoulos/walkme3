@@ -7,7 +7,11 @@ export let Menu = ({
     userObject, 
 }) =>
     <ul className={ menuOpen.toString() }>
-        <li></li>
+        <li className="menu-item">Content</li>
+        <li className="menu-item">Content</li>
+        <li className="menu-item">Content</li>
+        <li className="menu-item">Content</li>
+        <li className="menu-item">Content</li>
     </ul>
 
 let mapStateToProps = (state) => 
