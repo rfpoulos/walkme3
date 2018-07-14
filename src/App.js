@@ -21,6 +21,7 @@ let App = () =>
       <Header />
       <Menu />
       <Switch>
+        <Route path="/" component={ Walks } />
         <Route path="/signin" component={ SignIn } />
         <Route path="/createaccount" component={ CreateAccount } />
         <Route path="/walks" component={ Walks } />
