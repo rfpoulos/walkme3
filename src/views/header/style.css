@@ -12,12 +12,6 @@
     padding: 1em;
 }
 
-.sign-in-text {
-    text-decoration: none;
-    color: black;
-    white-space: nowrap;
-}
-
-.flex2 {
-    flex-basis: 30vw;
+.padding {
+    width: 2.5em;
 }

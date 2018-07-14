@@ -8,21 +8,16 @@ import { server } from '../../variables';
 
 export let Header = ({ updateMenuOpen, menuOpen, userObject }) =>
     <header className="header">
-        <div className="flex2">
         {
             userObject && <UserIcon 
                 src={ server + userObject.thumbnail } 
                 onClick={ updateMenuOpen(!menuOpen) } 
                 alt="Open menu / user image"/>
         }
-        {
-            !userObject && <a 
-                className="sign-in-text"
-                href="/signin">SIGN IN</a>
-        }
-        </div>
         <Logo />
-        <div className="flex2"></div>
+        {
+            userObject && <div className="padding"></div>
+        }
     </header>
 
 let mapStateToProps = (state) => 

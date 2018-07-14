@@ -8,12 +8,12 @@ import { updateUserObject } from '../../redux/actions';
 let mapStateToProps = (state) => 
     ({
         userObject: state.userObject,
-    })
+    });
 
 let mapDispatchToProps = (dispatch) =>
     ({
         updateUserObject: (userData) => dispatch(updateUserObject(userData)),
-    })
+    });
 
 let enhance = compose(
     connect(
@@ -29,17 +29,17 @@ let enhance = compose(
                     this.props.updateUserObject(userObject);
                 } catch(err) {
                     localStorage.removeItem('token');
-                    this.props.history.push('/signin')
+                    this.props.history.push('/signin');
                 }
             } else {
-                this.props.history.push('/signin')
+                this.props.history.push('/signin');
             }
         },
         componentDidUpdate({userObject}) {
             if (!this.props.userObject
                 && this.props.history.location !== 
                 ('/createaccount'|| '/signin')) {
-                this.props.history.push('/signin')
+                this.props.history.push('/signin');
             }
         }
     }),

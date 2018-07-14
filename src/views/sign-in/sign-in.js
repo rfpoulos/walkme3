@@ -43,7 +43,7 @@ let mapStateToProps = (state) =>
 
 let mapDispatchToProps = (dispatch) =>
     ({
-        updateUserObject
+        updateUserObject: (userObject) => dispatch(updateUserObject(userObject)),
     })
 
 export let enhance = compose(

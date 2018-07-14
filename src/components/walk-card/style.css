@@ -1,0 +1,44 @@
+.walk-card {
+    display:flex;
+    flex-flow: row wrap;
+    width: 60em;
+    max-width: 100%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    margin: 1em;
+    justify-content: center;
+}
+
+.walk-img-container {
+    width: 100%;
+    max-width: 25em;
+    max-height: 15em;
+}
+
+.walk-img {
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+}
+
+.walk-info {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    padding: 0;
+    flex-grow: 1;
+    list-style-type: none;
+}
+
+.walk-title {
+    margin: 0;
+    text-align: center;
+}
+
+.guide-name {
+    margin-right: 1em;
+}
+
+.guide {
+    display: flex;
+    align-items: center;
+}

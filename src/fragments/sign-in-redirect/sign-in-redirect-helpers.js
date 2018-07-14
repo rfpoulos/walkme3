@@ -8,4 +8,4 @@ export let fetchUserObject = () =>
             "authorization": localStorage.getItem('token') 
             })
         })
-        .then(res => res.json())
+        .then(res => res.json());

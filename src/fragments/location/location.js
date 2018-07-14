@@ -4,7 +4,21 @@ import { updateCurrentLocation } from '../../redux/actions';
 import { connect } from 'react-redux';
 import { success } from './location-helpers';
 
-let LocationDumb = compose(
+let mapStateToProps = (state) => 
+    ({
+
+    });
+
+let mapDispatchToProps = (dispatch) =>
+    ({
+        updateCurrentLocation: (res) => dispatch(updateCurrentLocation(res)),
+    });
+
+let enhance = compose(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    ),
     lifecycle({
         componentDidMount() {
             window.navigator.geolocation.watchPosition((pos) => 
@@ -12,21 +26,6 @@ let LocationDumb = compose(
             
         }
     }),
-)(() => Fragment);
+);
 
-let mapStateToProps = (state) => 
-    ({
-
-    })
-
-let mapDispatchToProps = (dispatch) =>
-    ({
-        updateCurrentLocation: (res) => dispatch(updateCurrentLocation(res))
-    })
-
-let Location = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(LocationDumb);
-
-export default Location;
+export default enhance(() => Fragment);
