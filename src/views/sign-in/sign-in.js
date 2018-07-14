@@ -42,11 +42,12 @@ export let SignIn = ({
 let mapStateToProps = (state) => 
     ({
 
-    })
+    });
 
-let mapDispatchToProps = {
-        updateUserObject,
-    }
+let mapDispatchToProps = (dispatch) => 
+    ({
+        updateUserObject: (userObject) => dispatch(updateUserObject(userObject)),
+    });
 
 export let enhance = compose(
     connect(
@@ -76,8 +77,8 @@ export let enhance = compose(
                     ...signInForm, 
                     password: event.target.value
             }),
-    })
-)
+    }),
+);
 
 
 export default enhance(SignIn);

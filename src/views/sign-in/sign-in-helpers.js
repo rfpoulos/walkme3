@@ -3,7 +3,7 @@ import { server } from '../../variables';
 let setTokenInLocalStorage = (userData) => {
     let token = userData.token;
     localStorage.setItem('token', token);
-}
+};
 
 let fetchSignIn = (signInForm) =>
     fetch(server + 'signin', {
@@ -14,10 +14,10 @@ let fetchSignIn = (signInForm) =>
             })
     })
     .then(res => res.json());
-    
+
 export let signIn = (signInForm, updateUserObject, history) => 
     async() => {
-        let userData = await fetchSignIn(signInForm)
+        let userData = await fetchSignIn(signInForm);
         setTokenInLocalStorage(userData);
         updateUserObject(userData);
         history.push('/walks');

@@ -6,7 +6,7 @@ let MenuDumb = ({
     menuOpen, 
     userObject, 
 }) =>
-    <ul className={menuOpen.toString()}>
+    <ul className={ menuOpen.toString() }>
         <li></li>
     </ul>
 

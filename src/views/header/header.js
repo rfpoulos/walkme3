@@ -33,9 +33,10 @@ let mapStateToProps = (state) =>
         userObject: state.userObject,
     });
 
-let mapDispatchToProps = {
-        updateMenuOpen,
-    };
+let mapDispatchToProps = (dispatch) =>
+    ({
+        updateMenuOpen: (click) => () => dispatch(updateMenuOpen(click)),
+    });
 
 export let enhance = connect(
     mapStateToProps,
