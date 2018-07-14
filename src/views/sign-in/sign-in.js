@@ -80,5 +80,4 @@ export let enhance = compose(
     }),
 );
 
-
 export default enhance(SignIn);

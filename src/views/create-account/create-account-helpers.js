@@ -22,4 +22,4 @@ export let createAccount = (createAccountForm, updateUserObject, history) =>
         } catch(err) {
             console.log(err)
         }
-    }
+    };

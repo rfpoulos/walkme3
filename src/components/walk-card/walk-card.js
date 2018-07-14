@@ -15,7 +15,9 @@ let WalkCard = ({
             />
         </div>
             <ul className="walk-info">
-                <li><h2 className="walk-title">{ walk.title }</h2></li>
+                <li>
+                    <h2 className="walk-title">{ walk.title }</h2>
+                </li>
                 <li className="guide">
                     <h4 className="guide-name">
                         Guided by { walk.username }

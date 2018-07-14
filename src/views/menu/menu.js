@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import { connect } from 'react-redux';
 
-let MenuDumb = ({ 
+export let Menu = ({ 
     menuOpen, 
     userObject, 
 }) =>
@@ -14,17 +14,16 @@ let mapStateToProps = (state) =>
     ({
         menuOpen: state.menuOpen,
         userObject: state.userObject,
-    })
+    });
 
 let mapDispatchToProps = (dispatch) =>
     ({
 
-    })
+    });
 
-let Menu = connect(
+export let enhance = connect(
     mapStateToProps,
     mapDispatchToProps
-)(MenuDumb);
+);
 
-
-export default Menu;
+export default enhance(Menu);

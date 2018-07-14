@@ -1,10 +1,10 @@
-import reducerHandlers from './actions';
+import actions from './actions';
 import { initialState } from './actions';
 
 let fallback = (state, action) => state;
 
 let reducer = (oldState = initialState, action) => {
-    let babyReducer = reducerHandlers[action.type] || fallback;
+    let babyReducer = actions[action.type] || fallback;
     return babyReducer(oldState, action);
 };
 
