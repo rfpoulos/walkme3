@@ -11,7 +11,6 @@ import SignIn from './views/sign-in/sign-in';
 import SignInRedirect from './fragments/sign-in-redirect/sign-in-redirect';
 import CreateAccount from './views/create-account/create-account';
 import Walks from './views/walks/walks';
-import { createAccount } from './views/create-account/create-account-helpers';
 
 let App = () =>
   <Router>

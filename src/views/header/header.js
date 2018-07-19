@@ -3,10 +3,6 @@ import './style.css';
 import { connect } from 'react-redux';
 import Logo from '../../components/logo/logo'
 import UserIcon from '../../components/user-icon/user-icon';
-import { 
-    Link,
-    withRouter
-} from 'react-router-dom';
 import { server } from '../../variables';
 import { 
     withState,
@@ -58,7 +54,6 @@ export let enhance = compose(
         handleToggle: ({ menuOpen, menuToggle }) =>
             () => menuToggle(!menuOpen)
     }),
-    withRouter,
     connect(
         mapStateToProps,
         mapDispatchToProps
