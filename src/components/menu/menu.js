@@ -1,21 +1,23 @@
 import React from 'react';
 import './style.css';
+import { withRouter } from 'react-router-dom';
+import { route } from './menu-helpers';
 
-export default ({ isOnline }) =>
+export default withRouter(({ isOnline, history }) =>
     <nav>
         {
             isOnline && 
             <ul>
-                <li>
+                <li onClick={ route(history, 'walks') }>
                     Find Walk
                 </li>
-                <li>
+                <li onClick={ route(history,'addwalk') }>
                     Add Walk
                 </li>
-                <li>
+                <li onClick={ route(history, 'offlinewalks') }>
                     Offline Walks
                 </li>
-                <li>
+                <li onClick={ route(history, 'profile') }>
                     Profile
                 </li>
                 <li>
@@ -36,4 +38,4 @@ export default ({ isOnline }) =>
                 </li>
             </ul>
         }
-    </nav>
+    </nav>)
