@@ -1,5 +1,7 @@
 # WalkMe3
 This is walking tour app that allows guides to upload walks that walkers can then search for.  This project is a major refactor of the project found here: https://github.com/rfpoulos/walkmereact.  The same node server from that project will be used, found here: https://github.com/rfpoulos/walkmenode.
+
+Trello Board: https://trello.com/b/lzYWrjAT/walkme3
 ## Features
 ### Sign In/Logout
 ### Redirect to Sign-in on Load
