@@ -1,6 +1,7 @@
 export const initialState = {
     currentLocation: null,
-    menuOpen: false,
+    userObject: null,
+    isOnline: true,
 }
 
 const UPDATE_CURRENT_LOCATION = "UPDATE_CURRENT_LOCATION";
@@ -17,9 +18,17 @@ let updateUserObjectAction = (state, action) => {
 }
 updateUserObject.toString = () => UPDATE_USER_OBJECT;
 
+const RESET_STATE = "RESET_STATE";
+export let resetState = () => ({type: RESET_STATE});
+let resetStateAction = (state, action) => {
+    return (initialState);
+}
+resetState.toString = () => RESET_STATE;
+
 const actions = {
     [updateCurrentLocation]: updateCurrentLocationAction,
     [updateUserObject]: updateUserObjectAction,
+    [resetState]: resetStateAction,
 };
 
 export default actions;

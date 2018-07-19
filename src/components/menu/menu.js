@@ -1,9 +1,21 @@
 import React from 'react';
 import './style.css';
 import { withRouter } from 'react-router-dom';
-import { route } from './menu-helpers';
+import { 
+    route,
+    logout,
+} from './menu-helpers';
+import {
+    compose,
+} from 'recompose';
+import { connect } from 'react-redux';
+import { resetState } from '../../redux/actions';
 
-export default withRouter(({ isOnline, history }) =>
+export let Menu = ({ 
+    isOnline, 
+    history,
+    resetState,
+}) =>
     <nav>
         {
             isOnline && 
@@ -20,7 +32,7 @@ export default withRouter(({ isOnline, history }) =>
                 <li onClick={ route(history, 'profile') }>
                     Profile
                 </li>
-                <li>
+                <li onClick={ logout(history, resetState) }>
                     Logout
                 </li>
             </ul>
@@ -38,4 +50,24 @@ export default withRouter(({ isOnline, history }) =>
                 </li>
             </ul>
         }
-    </nav>)
+    </nav>
+
+let mapStateToProps = (state) => 
+({
+    isOnline: state.isOnline,
+});
+
+let mapDispatchToProps = (dispatch) => 
+({
+    resetState: () => dispatch(resetState()),
+});
+
+export let enhance = compose(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps,
+    ),
+    withRouter,
+)
+
+export default enhance(Menu);

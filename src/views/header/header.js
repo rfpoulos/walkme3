@@ -34,7 +34,8 @@ export let Header = ({
             }
         </header>
         {
-            menuOpen && <Menu isOnline={ true } />
+            menuOpen && userObject && 
+            <Menu isOnline={ true } />
         }
     </div>
 
