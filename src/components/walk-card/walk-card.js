@@ -8,11 +8,6 @@ import LengthIcon from '../../images/walking-solid.svg';
 import HasVideo from '../../images/video-solid.svg';
 import HasAudio from '../../images/microphone-solid.svg';
 // import Ratings from '../ratings/ratings';
-import { 
-    compose, 
-    withState, 
-    withHandlers,
-} from 'recompose';
 
 export let WalkCard = ({ 
     walk, 
