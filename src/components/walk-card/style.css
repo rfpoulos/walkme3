@@ -1,43 +1,71 @@
 .walk-card {
-    display:flex;
-    flex-flow: row wrap;
+    display: flex;
     width: 60em;
     max-width: 100%;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    justify-content: center;
+    margin: .25em;
+    box-shadow: 0 3px 6px #00000029, 0 3px 6px rgba(0,0,0,0.23);
+    align-items: stretch;
 }
 
-.walk-img-container {
+.walk-thumbnail-container {
+    min-width: 9em;
+    max-width: 9em;
+    min-height: 9em;
+    max-height: 9em;
+}
+
+.walk-thumbnail {
+    object-fit: cover;
     width: 100%;
-    max-width: 25em;
-    max-height: 15em;
-}
-
-.walk-img {
-    object-fit: contain;
     height: 100%;
-    width: 100%;
+}
+
+.icon {
+    width: 1em;
+    height: 1em;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
 }
 
 .walk-info {
     display: flex;
     flex-direction: column;
-    margin: 1em;
-    padding: 0;
-    flex-grow: 1;
+    justify-content: space-between;
+    padding: 0em;
+    margin: 0;
     list-style-type: none;
+    flex-grow: 1;
 }
 
 .walk-title {
+    padding: 0;
     margin: 0;
-    text-align: center;
+    font-size: 1em;
 }
 
-.guide-name {
-    margin-right: 1em;
-}
-
-.guide {
+.walk-info-container {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    padding: .25em;
+    flex-grow: 1;
+}
+
+.info-text {
+    padding: 0;
+    margin: 0;
+    font-size: .8em;
+}
+
+.icon-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-ifs {
+    width: 1em;
+    height: 1em;
+    padding-right: .25em;
 }

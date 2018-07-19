@@ -23,7 +23,7 @@
 	text-decoration:none;
     text-shadow:0px 1px 0px #ffffff;
     width: 12em;
-    margin-bottom: 1em;
+    height: 2em;
 }
 .button:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));

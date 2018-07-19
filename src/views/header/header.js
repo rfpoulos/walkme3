@@ -2,45 +2,67 @@ import React from 'react';
 import './style.css';
 import { connect } from 'react-redux';
 import Logo from '../../components/logo/logo'
-import { updateMenuOpen } from '../../redux/actions';
 import UserIcon from '../../components/user-icon/user-icon';
+import { 
+    Link,
+    withRouter
+} from 'react-router-dom';
 import { server } from '../../variables';
+import { 
+    withState,
+    withHandlers,
+    compose,
+} from 'recompose';
+import Menu from '../../components/menu/menu';
 
 export let Header = ({ 
     updateMenuOpen, 
     menuOpen, 
     userObject,
+    handleToggle,
 }) =>
-    <header className="header">
+    <div>
+        <header className="header">
+            {
+                userObject && 
+                <UserIcon 
+                    src={ server + userObject.thumbnail } 
+                    onClick={ handleToggle } 
+                    alt="Open menu / user image"
+                />
+            }
+            <Logo />
+            {
+                userObject && 
+                <div className="padding"></div>
+            }
+        </header>
         {
-            userObject && 
-            <UserIcon 
-                src={ server + userObject.thumbnail } 
-                onClick={ updateMenuOpen(!menuOpen) } 
-                alt="Open menu / user image"
-            />
+            menuOpen && <Menu isOnline={ true } />
         }
-        <Logo />
-        {
-            userObject && 
-            <div className="padding"></div>
-        }
-    </header>
+    </div>
 
 let mapStateToProps = (state) => 
     ({
-        menuOpen: state.menuOpen,
         userObject: state.userObject,
     });
 
 let mapDispatchToProps = (dispatch) =>
     ({
-        updateMenuOpen: (click) => () => dispatch(updateMenuOpen(click)),
+
     });
 
-export let enhance = connect(
-    mapStateToProps,
-    mapDispatchToProps
+export let enhance = compose(
+    withState('menuOpen', 'menuToggle', false),
+    withHandlers({
+        handleToggle: ({ menuOpen, menuToggle }) =>
+            () => menuToggle(!menuOpen)
+    }),
+    withRouter,
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    ),
 );
 
 
