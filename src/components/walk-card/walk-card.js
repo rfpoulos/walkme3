@@ -9,7 +9,7 @@ import HasVideo from '../../images/video-solid.svg';
 import HasAudio from '../../images/microphone-solid.svg';
 // import Ratings from '../ratings/ratings';
 
-export let WalkCard = ({ 
+export default ({ 
     walk, 
     location,
 }) => 
@@ -66,5 +66,3 @@ export let WalkCard = ({
             </ul>
         </div>
     </div>
-
-export default WalkCard;
