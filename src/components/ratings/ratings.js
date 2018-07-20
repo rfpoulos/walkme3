@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import Star from '../../images/star-solid.svg';
 
-let Ratings = ({ averageRating, ratingsCount }) =>
+export default ({ averageRating, ratingsCount }) =>
     <div>
         <div className="star-hover-container"
             onMouseOver={}>
@@ -14,5 +14,3 @@ let Ratings = ({ averageRating, ratingsCount }) =>
             </div>
         </div>
     </div>
-
-export default Ratings;

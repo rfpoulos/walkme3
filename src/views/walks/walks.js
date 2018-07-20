@@ -18,6 +18,8 @@ let walk = ({
     "audio": "uploads/walk-audio/07f66bac79cbcea13b38550ad62db6aa",
     "averagerating": 3.2,
     "ratingscount": 78,
+    "hasAudio": true,
+    "hasVideo": false,
 })
 
 let Walks = () =>

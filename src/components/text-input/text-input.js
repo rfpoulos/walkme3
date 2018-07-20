@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-let TextInput = ({ 
+export default ({ 
     type, 
     placeholder, 
     value, 
@@ -13,5 +13,3 @@ let TextInput = ({
         value={ value }
         onChange={ onChange } 
     />
-
-export default TextInput;

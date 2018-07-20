@@ -47,14 +47,18 @@ export default ({
                 </li>
                 <li className="icon-info">
                     <div className="icon-info">
-                        <img src={ HasAudio }
-                            className="icon-ifs"
-                            alt="Has Audio"
-                        />
-                        <img src={ HasVideo }
-                            className="icon-ifs"
-                            alt="Has Video"
-                        />
+                        { 
+                            walk.hasAudio && <img src={ HasAudio }
+                                className="icon-ifs"
+                                alt="Has Audio"
+                                />
+                        }
+                        {
+                            walk.hasVideo && <img src={ HasVideo }
+                                className="icon-ifs"
+                                alt="Has Video"
+                            />
+                        }
                     </div>
                     <div className="icon-container">
                         <img src={ LocationArrow }

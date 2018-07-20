@@ -1,13 +1,11 @@
 import React from 'react';
 import './style.css';
 
-let Button = ({ 
+export default ({ 
     text, 
     onClick,
 }) =>
     <button className="button" 
         onClick={ onClick }>
-            { text }
+        { text }
     </button>
-
-export default Button;

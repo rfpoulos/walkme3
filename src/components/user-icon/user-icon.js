@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-let UserIcon = ({ 
+export default ({ 
     src, 
     alt, 
     onClick, 
@@ -13,5 +13,3 @@ let UserIcon = ({
             onClick={ onClick }
         />
     </div>
-
-export default UserIcon;
