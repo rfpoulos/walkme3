@@ -12,6 +12,7 @@ import HasAudio from '../../images/microphone-solid.svg';
 export default ({ 
     walk, 
     location,
+    distance,
 }) => 
     <div className="walk-card">
         <div className="walk-thumbnail-container">
@@ -58,9 +59,9 @@ export default ({
                     <div className="icon-container">
                         <img src={ LocationArrow }
                             className="icon"
-                            alt="Walk Length"
+                            alt="Distance to"
                         />
-                        <p className="info-text">{ walk.length } mi</p>
+                        <p className="info-text">{ distance } mi</p>
                     </div>
                 </li>
             </ul>

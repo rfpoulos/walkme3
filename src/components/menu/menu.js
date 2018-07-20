@@ -15,8 +15,9 @@ export let Menu = ({
     isOnline, 
     history,
     resetState,
+    onClick,
 }) =>
-    <nav>
+    <nav onClick={ onClick }>
         {
             isOnline && 
             <ul>

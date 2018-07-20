@@ -22,7 +22,7 @@ let walk = ({
 
 let Walks = () =>
     <div className="walks">
-        <WalkCard walk={ walk } />
+        <WalkCard walk={ walk } distance={ 10.23 } />
     </div>
 
 export default Walks;

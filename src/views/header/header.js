@@ -35,7 +35,7 @@ export let Header = ({
         </header>
         {
             menuOpen && userObject && 
-            <Menu isOnline={ true } />
+            <Menu isOnline={ true } onClick={ handleToggle } />
         }
     </div>
 
