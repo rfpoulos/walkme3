@@ -8,16 +8,22 @@ Trello Board: https://trello.com/b/lzYWrjAT/walkme3
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=YglOIbIk_II
 " target="_blank"><img src="http://img.youtube.com/vi/YglOIbIk_II/0.jpg" 
 alt="Video of Create Account" width="240" height="180" border="10" /></a>
+##### View Level Code
+https://github.com/rfpoulos/walkme3/blob/master/src/views/create-account/create-account.js
 ### Sign In/Logout
 ##### Video of sign in and logout
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=T4eL4MyTGp0
 " target="_blank"><img src="http://img.youtube.com/vi/T4eL4MyTGp0/0.jpg" 
 alt="Video of Sign in and Logout" width="240" height="180" border="10" /></a>
+##### View Level Code
+https://github.com/rfpoulos/walkme3/blob/master/src/views/sign-in/sign-in.js
 ### Redirect to Sign-in and Persistant Sign-in
 ##### Video of Redirect
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=AKYyk7SnaHI
 " target="_blank"><img src="http://img.youtube.com/vi/AKYyk7SnaHI/0.jpg" 
 alt="Video of Sign in and Logout" width="240" height="180" border="10" /></a>
+##### Fragment Code
+https://github.com/rfpoulos/walkme3/tree/master/src/fragments/sign-in-redirect
 ### Menu Navigation
 ### View/Edit Profile
 ### Search for Walks
