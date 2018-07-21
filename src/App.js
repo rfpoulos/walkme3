@@ -11,12 +11,14 @@ import SignIn from './views/sign-in/sign-in';
 import SignInRedirect from './fragments/sign-in-redirect/sign-in-redirect';
 import CreateAccount from './views/create-account/create-account';
 import Walks from './views/walks/walks';
+import Menu from './views/menu/menu'
 
 let App = () =>
   <Router>
     <div className="app">
       <Location />
       <SignInRedirect />
+      <Menu />
       <Header />
       <Switch>
         <Route path="/signin" component={ SignIn } />

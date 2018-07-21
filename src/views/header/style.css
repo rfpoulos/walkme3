@@ -15,3 +15,8 @@
 .padding {
     width: 2.5em;
 }
+
+.menu-slide {
+    display: inline-block;
+    position: absolute;
+}

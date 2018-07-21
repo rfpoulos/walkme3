@@ -7,20 +7,33 @@ import {
 } from './menu-helpers';
 import {
     compose,
+    withState,
+    withHandlers,
 } from 'recompose';
 import { connect } from 'react-redux';
 import { resetState } from '../../redux/actions';
+import UserIcon from '../../components/user-icon/user-icon';
+import { server } from '../../variables';
 
 export let Menu = ({ 
     isOnline, 
     history,
     resetState,
-    onClick,
+    handleToggle,
+    userObject,
+    menuOpen,
 }) =>
-    <nav onClick={ onClick }>
+    <nav onClick={ handleToggle } className="menu">
         {
-            isOnline && 
-            <ul>
+            userObject && <UserIcon 
+                src={ server + userObject.thumbnail } 
+                onClick={ handleToggle } 
+                alt="Open menu / user image"
+            />
+        }
+        {
+            isOnline && userObject && menuOpen &&
+            <ul className="nav-list">
                 <li onClick={ route(history, 'walks') }>
                     Find Walk
                 </li>
@@ -39,7 +52,7 @@ export let Menu = ({
             </ul>
         }{
             !isOnline &&
-            <ul>
+            <ul className="nav-list">
                 <li>
                     Offline Walks
                 </li>
@@ -54,21 +67,27 @@ export let Menu = ({
     </nav>
 
 let mapStateToProps = (state) => 
-({
-    isOnline: state.isOnline,
-});
+    ({
+        userObject: state.userObject,
+        isOnline: state.isOnline,
+    });
 
-let mapDispatchToProps = (dispatch) => 
-({
-    resetState: () => dispatch(resetState()),
-});
+let mapDispatchToProps = (dispatch) =>
+    ({
+        resetState: () => dispatch(resetState()),
+    });
 
 export let enhance = compose(
     connect(
         mapStateToProps,
-        mapDispatchToProps,
+        mapDispatchToProps
     ),
+    withState('menuOpen', 'menuToggle', false),
+    withHandlers({
+        handleToggle: ({ menuOpen, menuToggle }) =>
+            () => menuToggle(!menuOpen)
+    }),
     withRouter,
-)
+);
 
 export default enhance(Menu);
