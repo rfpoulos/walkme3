@@ -23,7 +23,7 @@ https://github.com/rfpoulos/walkme3/blob/master/src/views/sign-in/sign-in.js
 " target="_blank"><img src="http://img.youtube.com/vi/AKYyk7SnaHI/0.jpg" 
 alt="Video of Sign in and Logout" width="240" height="180" border="10" /></a>
 ##### View Code
-https://github.com/rfpoulos/walkme3/tree/master/src/fragments/sign-in-redirect
+https://github.com/rfpoulos/walkme3/blob/master/src/fragments/sign-in-redirect/sign-in-redirect.js
 ### Menu Navigation
 ### View/Edit Profile
 ### Search for Walks
