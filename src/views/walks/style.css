@@ -25,3 +25,8 @@
     display: flex;
     align-items: center;
 }
+
+.title-guide-results {
+    margin: 0;
+    padding: 0;
+}
