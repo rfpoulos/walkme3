@@ -4,8 +4,16 @@ This is walking tour app that allows guides to upload walks that walkers can the
 Trello Board: https://trello.com/b/lzYWrjAT/walkme3
 ## Features
 ### Sign In/Logout
+##### Video of sign in and logout
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=T4eL4MyTGp0
+" target="_blank"><img src="http://img.youtube.com/vi/T4eL4MyTGp0/0.jpg" 
+alt="Video of Sign in and Logout" width="240" height="180" border="10" /></a>
 ### Redirect to Sign-in on Load
 ### Create Account
+##### Video of create account
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=YglOIbIk_II
+" target="_blank"><img src="http://img.youtube.com/vi/YglOIbIk_II/0.jpg" 
+alt="Video of Create Account" width="240" height="180" border="10" /></a>
 ### Menu Navigation
 ### View/Edit Profile
 ### Search for Walks
