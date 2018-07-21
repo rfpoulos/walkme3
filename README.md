@@ -8,7 +8,11 @@ Trello Board: https://trello.com/b/lzYWrjAT/walkme3
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=T4eL4MyTGp0
 " target="_blank"><img src="http://img.youtube.com/vi/T4eL4MyTGp0/0.jpg" 
 alt="Video of Sign in and Logout" width="240" height="180" border="10" /></a>
-### Redirect to Sign-in on Load
+### Redirect to Sign-in and Persistant Sign-in
+##### Video of Redirect
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=AKYyk7SnaHI
+" target="_blank"><img src="http://img.youtube.com/vi/AKYyk7SnaHI/0.jpg" 
+alt="Video of Sign in and Logout" width="240" height="180" border="10" /></a>
 ### Create Account
 ##### Video of create account
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=YglOIbIk_II
