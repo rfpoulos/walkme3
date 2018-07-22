@@ -111,7 +111,7 @@ export let enhance = compose(
         lat: null,
         lng: null,
         limit: 25,
-        sortBy: 'distance',
+        sortBy: 'rating DESC',
         miles: 5,
     }),
     withState('walkResults', 'updateWalkResults', []),
@@ -124,15 +124,18 @@ export let enhance = compose(
                 updateSearch,
                 searchForm,
                 places,
-                updateWalkResults, 
+                updateWalkResults,
+                updateText 
             }) => async () => {
-                updatePlaces(refs.searchBox.getPlaces());
+                let newPlace = refs.searchBox.getPlaces();
+                updatePlaces(newPlace);
                 let newSearch = { 
                     ...searchForm,
-                    lat: refs.searchBox.getPlaces()[0].geometry.location.lat(),
-                    lng: refs.searchBox.getPlaces()[0].geometry.location.lng(),
+                    lat: newPlace[0].geometry.location.lat(),
+                    lng: newPlace[0].geometry.location.lng(),
                     limit: 25,
                 };
+                updateText(newPlace[0].formatted_address)
                 updateSearch(newSearch);
                 let results = await getWalks(newSearch);
                 updateWalkResults(results);
