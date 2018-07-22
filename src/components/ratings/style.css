@@ -1,0 +1,26 @@
+.ratings-container {
+    display: flex;
+    align-items: center;
+}
+.star {
+    width: 1em;
+    height:  1em;
+}
+
+.star-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hollow-container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+}
+
+.count {
+    margin: 0;
+    padding: 0;
+}

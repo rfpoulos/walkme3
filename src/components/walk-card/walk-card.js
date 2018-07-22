@@ -7,7 +7,7 @@ import LocationArrow from '../../images/location-arrow-solid.svg';
 import LengthIcon from '../../images/walking-solid.svg';
 import HasVideo from '../../images/video-solid.svg';
 import HasAudio from '../../images/microphone-solid.svg';
-// import Ratings from '../ratings/ratings';
+import Ratings from '../ratings/ratings';
 
 export default ({ 
     walk, 
@@ -23,9 +23,10 @@ export default ({
         </div>
         <div className="walk-info-container">
             <h2 className="walk-title">{ walk.title }</h2>
+            <Ratings averageRating={ parseFloat(walk.rating) }
+                ratingsCount={ parseInt(walk.count) }
+            />
             <ul className="walk-info">
-                <li>{ parseFloat(walk.rating).toFixed(2) + 
-                    ' (' + walk.count + ')'}</li>
                 <li className="icon-container">
                     <img src={ StartIcon }
                         className="icon"

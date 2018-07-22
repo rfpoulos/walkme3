@@ -29,6 +29,7 @@ export let Walks = ({
     userLocation,
     sortChange,
     searchCurrentLocation,
+    currentLocation,
 }) =>
 <div className="location-search">
     <StandaloneSearchBox
@@ -40,9 +41,12 @@ export let Walks = ({
             placeholder="Street address, city, state"
         />
     </StandaloneSearchBox>
-    <Button text="Use My Location"
-        onClick={ searchCurrentLocation }
-    />
+    {
+        currentLocation &&
+        <Button text="Use My Location"
+            onClick={ searchCurrentLocation }
+        />
+    }
     <TextInput placeholder="Search by title or guide" />
     <ul className="title-guide-results">
     </ul>
@@ -136,8 +140,10 @@ export let enhance = compose(
                     miles: event.target.value
                 };
                 updateSearch(newSearch);
-                let results = await getWalks(newSearch);
-                updateWalkResults(results);
+                if (newSearch.lat) {
+                    let results = await getWalks(newSearch);
+                    updateWalkResults(results);
+                }
             },
         sortChange: ({ 
                 searchForm, 
@@ -149,8 +155,10 @@ export let enhance = compose(
                     sortBy: event.target.value
                 };
                 updateSearch(newSearch);
-                let results = await getWalks(newSearch);
-                updateWalkResults(results);
+                if (newSearch.lat) {
+                    let results = await getWalks(newSearch);
+                    updateWalkResults(results);
+                }
         },
         searchCurrentLocation: ({ 
                 searchForm, 
