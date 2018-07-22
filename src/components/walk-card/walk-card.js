@@ -43,18 +43,22 @@ export default ({
                         className="icon"
                         alt="Walk Length"
                     />
-                    <p className="info-text">{ walk.length + " mi" }</p>
+                    <p className="info-text">{ 
+                        (walk.length / 1609.334).toFixed(2) + " mi" 
+                    }</p>
                 </li>
                 <li className="icon-info">
                     <div className="icon-info">
                         { 
-                            walk.hasAudio && <img src={ HasAudio }
+                            (walk.audio || walk.poiaudio)
+                            && <img src={ HasAudio }
                                 className="icon-ifs"
                                 alt="Has Audio"
                                 />
                         }
                         {
-                            walk.hasVideo && <img src={ HasVideo }
+                            (walk.video || walk.poivideo) 
+                            && <img src={ HasVideo }
                                 className="icon-ifs"
                                 alt="Has Video"
                             />
@@ -65,7 +69,7 @@ export default ({
                             className="icon"
                             alt="Distance to"
                         />
-                        <p className="info-text">{ distance } mi</p>
+                        <p className="info-text">{ walk.distance.toFixed(2) } mi</p>
                     </div>
                 </li>
             </ul>

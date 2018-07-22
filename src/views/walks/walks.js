@@ -13,6 +13,9 @@ import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/Sta
 import TextInput from '../../components/text-input/text-input';
 import Button from '../../components/button/button';
 import { googleKey } from '../../variables';
+import { getWalks } from './walks-helpers';
+import WalkCard from '../../components/walk-card/walk-card';
+import { connect } from 'react-redux';
 
 export let Walks = ({
     onSearchBoxMounted,
@@ -20,6 +23,12 @@ export let Walks = ({
     onPlacesChanged,
     places,
     searchForm,
+    results,
+    walkResults,
+    distanceChange,
+    userLocation,
+    sortChange,
+    searchCurrentLocation,
 }) =>
 <div className="location-search">
     <StandaloneSearchBox
@@ -31,13 +40,18 @@ export let Walks = ({
             placeholder="Street address, city, state"
         />
     </StandaloneSearchBox>
+    <Button text="Use My Location"
+        onClick={ searchCurrentLocation }
+    />
     <TextInput placeholder="Search by title or guide" />
     <ul className="title-guide-results">
     </ul>
     <div className="sort-options">
         <div className="options-container">
-            <p>Radius:</p>
-            <select name="miles">
+            <p>Within:</p>
+            <select onChange={ distanceChange } 
+                value={ searchForm.miles }
+            >
                 <option value="1">1 mi</option>
                 <option value="5">5 mi</option>
                 <option value="10">10 mi</option>
@@ -47,15 +61,25 @@ export let Walks = ({
         </div>
         <div className="options-container">
             <p>Sort by:</p>
-            <select name="sortby">
+            <select onChange={ sortChange }
+                value={ searchForm.sortBy }
+            >
                 <option value="rating">Rating</option>
-                <option value="distance">Distance To</option>
+                <option value="distance" >Distance To</option>
                 <option value="length">Length</option>
             </select>
         </div>
     </div>
+    {
+        walkResults.map(walk =>
+            <WalkCard key={ walk.id }walk={ walk } />
+        )
+    }
 </div>
- 
+
+let mapStateToProps = (state) => ({
+    currentLocation: state.currentLocation,
+});
 
 export let enhance = compose(
     withProps({
@@ -65,15 +89,19 @@ export let enhance = compose(
         loadingElement: <div style={{ height: `100%` }} />,
         containerElement: <div style={{ height: `400px` }} />,
     }),
+    connect(
+        mapStateToProps,
+    ),
     withState('refs', 'updateRefs', {}),
     withState('places', 'updatePlaces', []),
     withState('searchForm', 'updateSearch', {
         lat: null,
         lng: null,
-        range: 25,
-        sortBy: 'ratings',
-        miles: 1,
+        limit: 25,
+        sortBy: 'distance',
+        miles: 5,
     }),
+    withState('walkResults', 'updateWalkResults', []),
     withHandlers({
         onSearchBoxMounted: ({ refs, updateRefs }) =>
             searchBox => updateRefs({ ...refs, searchBox }),
@@ -82,15 +110,61 @@ export let enhance = compose(
                 updatePlaces, 
                 updateSearch,
                 searchForm,
-                places, 
-            }) => () => {
-                updatePlaces(refs.searchBox.getPlaces())
-                updateSearch({ 
+                places,
+                updateWalkResults, 
+            }) => async () => {
+                updatePlaces(refs.searchBox.getPlaces());
+                let newSearch = { 
                     ...searchForm,
                     lat: refs.searchBox.getPlaces()[0].geometry.location.lat(),
                     lng: refs.searchBox.getPlaces()[0].geometry.location.lng(),
-                })
+                    limit: 25,
+                };
+                updateSearch(newSearch);
+                let results = await getWalks(newSearch);
+                updateWalkResults(results);
             },
+        distanceChange: ({ 
+                searchForm, 
+                updateSearch,
+                updateWalkResults,
+            }) => async event => {
+                let newSearch = {
+                    ...searchForm,
+                    miles: event.target.value
+                };
+                updateSearch(newSearch);
+                let results = await getWalks(newSearch);
+                updateWalkResults(results);
+            },
+        sortChange: ({ 
+                searchForm, 
+                updateSearch,
+                updateWalkResults,
+        }) => async event => {
+                let newSearch = {
+                    ...searchForm,
+                    sortBy: event.target.value
+                };
+                updateSearch(newSearch);
+                let results = await getWalks(newSearch);
+                updateWalkResults(results);
+        },
+        searchCurrentLocation: ({ 
+                searchForm, 
+                updateSearch,
+                updateWalkResults,
+                currentLocation,
+        }) => async event => {
+                let newSearch = {
+                    ...searchForm,
+                    lat: currentLocation.lat,
+                    lng: currentLocation.lng
+                };
+                updateSearch(newSearch);
+                let results = await getWalks(newSearch);
+                updateWalkResults(results);
+        },
     }),
     withScriptjs  
 );
