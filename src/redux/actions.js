@@ -1,5 +1,5 @@
 export const initialState = {
-    currentLocation: null,
+    currentLocation: {lat: null, lng: null},
     userObject: null,
     isOnline: true,
 }

@@ -23,10 +23,9 @@ export default ({
         </div>
         <div className="walk-info-container">
             <h2 className="walk-title">{ walk.title }</h2>
-            {/* <Ratings averageRating={ walk.averagerating } */}
-                {/* ratingsCount={ walk.ratingscount }
-            /> */}
             <ul className="walk-info">
+                <li>{ parseFloat(walk.rating).toFixed(2) + 
+                    ' (' + walk.count + ')'}</li>
                 <li className="icon-container">
                     <img src={ StartIcon }
                         className="icon"
@@ -44,20 +43,20 @@ export default ({
                         alt="Walk Length"
                     />
                     <p className="info-text">{ 
-                        (walk.length / 1609.334).toFixed(2) + " mi" 
+                        parseFloat(walk.length).toFixed(2) + " mi" 
                     }</p>
                 </li>
                 <li className="icon-info">
                     <div className="icon-info">
                         { 
-                            (walk.audio || walk.poiaudio)
+                            (walk.audio || walk.poisaudio)
                             && <img src={ HasAudio }
                                 className="icon-ifs"
                                 alt="Has Audio"
                                 />
                         }
                         {
-                            (walk.video || walk.poivideo) 
+                            (walk.video || walk.poisvideo) 
                             && <img src={ HasVideo }
                                 className="icon-ifs"
                                 alt="Has Video"

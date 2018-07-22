@@ -30,3 +30,16 @@
     margin: 0;
     padding: 0;
 }
+
+.options {
+    width: 6rem;
+    padding: 5px;
+    font-size: 1rem;
+    line-height: 1;
+    border: 0;
+    border-radius: 5px;
+    height: 2rem;
+    background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #ddd;
+    -webkit-appearance: none;
+    background-position-x: 4.6rem;
+}

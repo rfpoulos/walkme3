@@ -48,8 +48,9 @@ export let Walks = ({
     </ul>
     <div className="sort-options">
         <div className="options-container">
-            <p>Within:</p>
-            <select onChange={ distanceChange } 
+            <p className="options-title">Within:</p>
+            <select className="options"
+                onChange={ distanceChange } 
                 value={ searchForm.miles }
             >
                 <option value="1">1 mi</option>
@@ -60,12 +61,13 @@ export let Walks = ({
             </select>
         </div>
         <div className="options-container">
-            <p>Sort by:</p>
-            <select onChange={ sortChange }
+            <p className="options-title">Sort by:</p>
+            <select className="options"
+                onChange={ sortChange }
                 value={ searchForm.sortBy }
             >
-                <option value="rating">Rating</option>
-                <option value="distance" >Distance To</option>
+                <option value="rating DESC">Rating</option>
+                <option value="distance" >Distance</option>
                 <option value="length">Length</option>
             </select>
         </div>
