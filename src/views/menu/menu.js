@@ -40,6 +40,9 @@ export let Menu = ({
                 <li onClick={ route(history,'addwalk') }>
                     Add Walk
                 </li>
+                <li onClick={ route(history, 'mywalks') }>
+                    My Walks
+                </li>
                 <li onClick={ route(history, 'offlinewalks') }>
                     Offline Walks
                 </li>

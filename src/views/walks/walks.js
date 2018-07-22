@@ -16,6 +16,7 @@ import { googleKey } from '../../variables';
 import { getWalks } from './walks-helpers';
 import WalkCard from '../../components/walk-card/walk-card';
 import { connect } from 'react-redux';
+import MapMarker from '../../images/map-marker-alt-solid.svg';
 
 export let Walks = ({
     onSearchBoxMounted,
@@ -30,6 +31,8 @@ export let Walks = ({
     sortChange,
     searchCurrentLocation,
     currentLocation,
+    searchText,
+    handleText,
 }) =>
 <div className="location-search">
     <StandaloneSearchBox
@@ -37,16 +40,19 @@ export let Walks = ({
         bounds={ bounds }
         onPlacesChanged={ onPlacesChanged }
     >
-        <TextInput 
-            placeholder="Street address, city, state"
-        />
+        <div className="search-container">
+            <TextInput value={ searchText }
+                onChange={ handleText }
+                placeholder="Street address, city, state"
+                style={{ 'padding-left': '2rem' }}
+            />
+            <img src={ MapMarker }
+                className="current-location"
+                alt="Use current location"
+                onClick={ searchCurrentLocation }
+            />
+        </div>
     </StandaloneSearchBox>
-    {
-        currentLocation &&
-        <Button text="Use My Location"
-            onClick={ searchCurrentLocation }
-        />
-    }
     <TextInput placeholder="Search by title or guide" />
     <ul className="title-guide-results">
     </ul>
@@ -100,6 +106,7 @@ export let enhance = compose(
     ),
     withState('refs', 'updateRefs', {}),
     withState('places', 'updatePlaces', []),
+    withState('searchText', 'updateText', ''),
     withState('searchForm', 'updateSearch', {
         lat: null,
         lng: null,
@@ -165,16 +172,22 @@ export let enhance = compose(
                 updateSearch,
                 updateWalkResults,
                 currentLocation,
+                updateText,
         }) => async event => {
-                let newSearch = {
-                    ...searchForm,
-                    lat: currentLocation.lat,
-                    lng: currentLocation.lng
-                };
-                updateSearch(newSearch);
-                let results = await getWalks(newSearch);
-                updateWalkResults(results);
+                if (currentLocation) {
+                    let newSearch = {
+                        ...searchForm,
+                        lat: currentLocation.lat,
+                        lng: currentLocation.lng
+                    };
+                    updateSearch(newSearch);
+                    updateText("Current Location");
+                    let results = await getWalks(newSearch);
+                    updateWalkResults(results);
+                }
         },
+        handleText: ({ updateText }) =>
+            event => updateText(event.target.value)
     }),
     withScriptjs  
 );
