@@ -1,6 +1,7 @@
 .menu {
     position: absolute;
     margin: .75rem;
+    z-index: 1;
 }
 
 .nav-list {
