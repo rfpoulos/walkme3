@@ -20,11 +20,13 @@ let App = () =>
       <SignInRedirect />
       <Menu />
       <Header />
-      <Switch>
-        <Route path="/signin" component={ SignIn } />
-        <Route path="/createaccount" component={ CreateAccount } />
-        <Route path="/" component={ Walks } />
-      </Switch>
+      <div className="router">
+        <Switch>
+          <Route path="/signin" component={ SignIn } />
+          <Route path="/createaccount" component={ CreateAccount } />
+          <Route path="/" component={ Walks } />
+        </Switch>
+      </div>
     </div>
   </Router>
 ;

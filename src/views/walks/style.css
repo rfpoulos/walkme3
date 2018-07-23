@@ -50,10 +50,15 @@
     height: 1.5rem;
     margin-top: 1.25rem;
     margin-left: 1.25rem;
+    z-index: 1;
 }
 
 .search-container {
     display: flex;
     width: 100%;
     max-width: 22rem;
+}
+
+.page-title {
+    margin: 0
 }

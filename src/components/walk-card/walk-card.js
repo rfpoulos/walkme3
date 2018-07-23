@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import { server } from '../../variables';
 import UserIcon from '../user-icon/user-icon';
-import StartIcon from '../../images/map-marker-alt-solid.svg';
+import StartIcon from '../../images/map-pin-solid.svg';
 import LocationArrow from '../../images/location-arrow-solid.svg';
 import LengthIcon from '../../images/walking-solid.svg';
 import HasVideo from '../../images/video-solid.svg';
@@ -24,7 +24,7 @@ export default ({
         <div className="walk-info-container">
             <h2 className="walk-title">{ walk.title }</h2>
             <Ratings averageRating={ parseFloat(walk.rating) }
-                ratingsCount={ parseInt(walk.count) }
+                ratingsCount={ parseInt(walk.count, 10) }
             />
             <ul className="walk-info">
                 <li className="icon-container">

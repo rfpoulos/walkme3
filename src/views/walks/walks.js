@@ -35,6 +35,7 @@ export let Walks = ({
     handleText,
 }) =>
 <div className="location-search">
+    <h2 className="page-title">Find Walking Tours</h2>
     <StandaloneSearchBox
         ref={ onSearchBoxMounted }
         bounds={ bounds }
@@ -44,7 +45,7 @@ export let Walks = ({
             <TextInput value={ searchText }
                 onChange={ handleText }
                 placeholder="Street address, city, state"
-                style={{ 'padding-left': '2rem' }}
+                style={{ paddingLeft: '2rem' }}
             />
             <img src={ MapMarker }
                 className="current-location"
@@ -56,6 +57,13 @@ export let Walks = ({
     <TextInput placeholder="Search by title or guide" />
     <ul className="title-guide-results">
     </ul>
+    <div>
+        <input type="checkbox" id="video" value="checked" 
+            onChange={(event) => event}/>
+        <label htmlFor="video">Only with video</label>
+        <input type="checkbox" id="audio" value="Has Audio"/>
+        <label htmlFor="audio">Only with audio</label>
+    </div>
     <div className="sort-options">
         <div className="options-container">
             <p className="options-title">Within:</p>

@@ -6,7 +6,7 @@ import StarHollow from '../../images/star-regular.svg';
 export default ({ averageRating, ratingsCount }) =>
     <div className="ratings-container">
         <div className="ratings-container">
-            <div style={{ width: `${averageRating}em`, height: '1em', overflow: 'hidden' }}>
+            <div style={{ width: `${parseFloat(averageRating).toFixed(2)}rem`, height: '1em', overflow: 'hidden' }}>
                 <img className="star" 
                     src={ Star}
                     alt="1"
