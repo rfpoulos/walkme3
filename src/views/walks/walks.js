@@ -17,6 +17,7 @@ import { getWalks } from './walks-helpers';
 import WalkCard from '../../components/walk-card/walk-card';
 import { connect } from 'react-redux';
 import MapMarker from '../../images/map-marker-alt-solid.svg';
+import IconLeftInput from '../../components/text-input/icon-left';
 
 export let Walks = ({
     onSearchBoxMounted,
@@ -41,7 +42,15 @@ export let Walks = ({
         bounds={ bounds }
         onPlacesChanged={ onPlacesChanged }
     >
-        <div className="search-container">
+        <IconLeftInput 
+            src={ MapMarker }
+            value={ searchText }
+            onChange={ handleText }
+            placeholder="Street address, city, state"
+            alt="Use current location"
+            onClick={ searchCurrentLocation }
+        />
+        {/* <div className="search-container">
             <TextInput value={ searchText }
                 onChange={ handleText }
                 placeholder="Street address, city, state"
@@ -52,7 +61,7 @@ export let Walks = ({
                 alt="Use current location"
                 onClick={ searchCurrentLocation }
             />
-        </div>
+        </div> */}
     </StandaloneSearchBox>
     <TextInput placeholder="Search by title or guide" />
     <ul className="title-guide-results">
