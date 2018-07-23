@@ -94,7 +94,7 @@ export let Walks = ({
                 onChange={ sortChange }
                 value={ searchForm.sortBy }
             >
-                <option value="rating DESC">Rating</option>
+                <option value="ratingavg DESC">Rating</option>
                 <option value="distance" >Distance</option>
                 <option value="length">Length</option>
             </select>
@@ -131,7 +131,7 @@ export let enhance = compose(
         lat: null,
         lng: null,
         limit: 25,
-        sortBy: 'rating DESC',
+        sortBy: 'ratingavg DESC',
         miles: 5,
     }),
     withState('walkResults', 'updateWalkResults', []),

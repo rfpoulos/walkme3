@@ -23,8 +23,8 @@ export default ({
         </div>
         <div className="walk-info-container">
             <h2 className="walk-title">{ walk.title }</h2>
-            <Ratings averageRating={ parseFloat(walk.rating) }
-                ratingsCount={ parseInt(walk.count, 10) }
+            <Ratings averageRating={ parseFloat(walk.ratingavg) }
+                ratingsCount={ parseInt(walk.ratingcount, 10) }
             />
             <ul className="walk-info">
                 <li className="icon-container">
@@ -50,14 +50,14 @@ export default ({
                 <li className="icon-info">
                     <div className="icon-info">
                         { 
-                            (walk.audio || walk.poisaudio)
+                            (walk.audio || walk.poisaudio > 0)
                             && <img src={ HasAudio }
                                 className="icon-ifs"
                                 alt="Has Audio"
                                 />
                         }
                         {
-                            (walk.video || walk.poisvideo) 
+                            (walk.video || walk.poisvideo > 0) 
                             && <img src={ HasVideo }
                                 className="icon-ifs"
                                 alt="Has Video"
