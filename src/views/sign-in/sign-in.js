@@ -23,16 +23,20 @@ export let SignIn = ({
     history,
 }) =>
     <div className="sign-in">
-        <TextInput type="text" 
-            placeholder="Email or Username"
-            value={ signInForm.identifier }
-            onChange={ handleEmail }
-        />
-        <TextInput type="password"
-            placeholder="Password"
-            value={ signInForm.password }
-            onChange={ handlePassword }
-        />
+        <div className="sign-in-spacing">        
+            <TextInput type="text" 
+                placeholder="Email or Username"
+                value={ signInForm.identifier }
+                onChange={ handleEmail }
+            />
+        </div>
+        <div className="sign-in-spacing">        
+            <TextInput type="password"
+                placeholder="Password"
+                value={ signInForm.password }
+                onChange={ handlePassword }
+            />
+        </div>
         <Button text="Sign In" 
             onClick={ signIn(signInForm, updateUserObject, history) }
         />

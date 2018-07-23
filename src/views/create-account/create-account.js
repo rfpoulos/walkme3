@@ -24,21 +24,27 @@ export let CreateAccount = ({
     history,
 }) =>
     <div className="create-account">
-        <TextInput type="email" 
-            placeholder="Email"
-            value={ createAccountForm.email }
-            onChange={ handleEmail }
-        />
-        <TextInput type="text" 
-            placeholder="Username"
-            value={ createAccountForm.username }
-            onChange={ handleUsername }
-        />
-        <TextInput type="password"
-            placeholder="Password"
-            value={ createAccountForm.password }
-            onChange={ handlePassword }
-        />
+        <div className="create-account-spacing">
+            <TextInput type="email" 
+                placeholder="Email"
+                value={ createAccountForm.email }
+                onChange={ handleEmail }
+            />
+        </div>
+        <div className="create-account-spacing">        
+            <TextInput type="text" 
+                placeholder="Username"
+                value={ createAccountForm.username }
+                onChange={ handleUsername }
+            />
+            </div>
+        <div className="create-account-spacing">        
+            <TextInput type="password"
+                placeholder="Password"
+                value={ createAccountForm.password }
+                onChange={ handlePassword }
+            />
+        </div>
         <Button text="Create Account" 
             onClick={ 
                 createAccount(createAccountForm, updateUserObject, history)

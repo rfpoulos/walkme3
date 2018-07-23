@@ -18,6 +18,8 @@ import WalkCard from '../../components/walk-card/walk-card';
 import { connect } from 'react-redux';
 import MapMarker from '../../images/map-marker-alt-solid.svg';
 import IconLeftInput from '../../components/text-input/icon-left';
+import DistanceIcon from '../../images/location-arrow-solid.svg';
+import SortIcon from '../../images/sort-solid.svg';
 
 export let Walks = ({
     onSearchBoxMounted,
@@ -37,37 +39,29 @@ export let Walks = ({
 }) =>
 <div className="location-search">
     <h2 className="page-title">Find Walking Tours</h2>
-    <StandaloneSearchBox
-        ref={ onSearchBoxMounted }
-        bounds={ bounds }
-        onPlacesChanged={ onPlacesChanged }
-    >
-        <IconLeftInput 
-            src={ MapMarker }
-            value={ searchText }
-            onChange={ handleText }
-            placeholder="Street address, city, state"
-            alt="Use current location"
-            onClick={ searchCurrentLocation }
-        />
-        {/* <div className="search-container">
-            <TextInput value={ searchText }
+    <div className="search-container">
+        <StandaloneSearchBox
+            ref={ onSearchBoxMounted }
+            bounds={ bounds }
+            onPlacesChanged={ onPlacesChanged }
+        >
+            <IconLeftInput 
+                src={ MapMarker }
+                value={ searchText }
                 onChange={ handleText }
                 placeholder="Street address, city, state"
-                style={{ paddingLeft: '2rem' }}
-            />
-            <img src={ MapMarker }
-                className="current-location"
                 alt="Use current location"
                 onClick={ searchCurrentLocation }
             />
-        </div> */}
-    </StandaloneSearchBox>
-    <TextInput placeholder="Search by title or guide" />
+        </StandaloneSearchBox>
+    </div>
+    <div className="search-container">
+        <TextInput placeholder="Search by title or guide" />
+    </div>
     <ul className="title-guide-results">
     </ul>
     <div className="filter-by">
-        <p>Filter By: </p>
+        <p>Filter: </p>
         <input type="checkbox" id="video" value="checked" 
             onChange={(event) => event}/>
         <label htmlFor="video">Video</label>
@@ -76,7 +70,10 @@ export let Walks = ({
     </div>
     <div className="sort-options">
         <div className="options-container">
-            <p className="options-title">Within:</p>
+            <img className="icon"
+                src={ DistanceIcon }
+                alt="Distance to"
+            />
             <select className="options"
                 onChange={ distanceChange } 
                 value={ searchForm.miles }
@@ -89,7 +86,10 @@ export let Walks = ({
             </select>
         </div>
         <div className="options-container">
-            <p className="options-title">Sort by:</p>
+            <img className="icon"
+                src={ SortIcon }
+                alt="Sort"
+            />
             <select className="options"
                 onChange={ sortChange }
                 value={ searchForm.sortBy }
@@ -102,9 +102,9 @@ export let Walks = ({
     </div>
     {
         walkResults.map(walk =>
-            <div className="walk-card-container">
-                <WalkCard key={ walk.id }walk={ walk } />
-            </div>
+        <div className="walk-card-container">
+            <WalkCard key={ walk.id }walk={ walk } />
+        </div>
         )
     }
 </div>

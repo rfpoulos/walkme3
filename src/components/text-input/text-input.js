@@ -14,5 +14,5 @@ export default ({
         value={ value }
         onChange={ onChange } 
         style={ style }
-        onClick={ (event) => event.target.select() }
+        onClick={ (event) => event.target.focus() }
     />
