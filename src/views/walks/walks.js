@@ -57,12 +57,13 @@ export let Walks = ({
     <TextInput placeholder="Search by title or guide" />
     <ul className="title-guide-results">
     </ul>
-    <div>
+    <div className="filter-by">
+        <p>Filter By: </p>
         <input type="checkbox" id="video" value="checked" 
             onChange={(event) => event}/>
-        <label htmlFor="video">Only with video</label>
+        <label htmlFor="video">Video</label>
         <input type="checkbox" id="audio" value="Has Audio"/>
-        <label htmlFor="audio">Only with audio</label>
+        <label htmlFor="audio">Audio</label>
     </div>
     <div className="sort-options">
         <div className="options-container">
@@ -92,7 +93,9 @@ export let Walks = ({
     </div>
     {
         walkResults.map(walk =>
-            <WalkCard key={ walk.id }walk={ walk } />
+            <div className="walk-card-container">
+                <WalkCard key={ walk.id }walk={ walk } />
+            </div>
         )
     }
 </div>

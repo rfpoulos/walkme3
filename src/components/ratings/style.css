@@ -1,6 +1,7 @@
 .ratings-container {
     display: flex;
     align-items: center;
+    height: 1rem;
 }
 .star {
     width: 1em;
@@ -9,9 +10,7 @@
 
 .star-container {
     display: flex;
-    align-items: center;
-    width: 100%;
-    overflow: hidden;
+    width: 5rem;
 }
 
 .hollow-container {
