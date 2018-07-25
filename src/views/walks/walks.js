@@ -6,12 +6,9 @@ import {
     withState,
     withHandlers,
 } from 'recompose';
-import {
-  withScriptjs,
-} from 'react-google-maps';
+import { withScriptjs } from 'react-google-maps';
 import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/StandaloneSearchBox';
 import TextInput from '../../components/text-input/text-input';
-import Button from '../../components/button/button';
 import { googleKey } from '../../variables';
 import { getWalks } from './walks-helpers';
 import WalkCard from '../../components/walk-card/walk-card';
@@ -20,6 +17,8 @@ import MapMarker from '../../images/map-marker-alt-solid.svg';
 import IconLeftInput from '../../components/text-input/icon-left';
 import DistanceIcon from '../../images/location-arrow-solid.svg';
 import SortIcon from '../../images/sort-solid.svg';
+import DropDown from '../../components/drop-down/drop-down';
+import { withRouter } from 'react-router-dom';
 
 export let Walks = ({
     onSearchBoxMounted,
@@ -36,6 +35,7 @@ export let Walks = ({
     currentLocation,
     searchText,
     handleText,
+    history,
 }) =>
 <div className="location-search">
     <h2 className="page-title">Find Walking Tours</h2>
@@ -61,7 +61,6 @@ export let Walks = ({
     <ul className="title-guide-results">
     </ul>
     <div className="filter-by">
-        <p>Filter: </p>
         <input type="checkbox" id="video" value="checked" 
             onChange={(event) => event}/>
         <label htmlFor="video">Video</label>
@@ -69,41 +68,35 @@ export let Walks = ({
         <label htmlFor="audio">Audio</label>
     </div>
     <div className="sort-options">
-        <div className="options-container">
-            <img className="icon"
-                src={ DistanceIcon }
-                alt="Distance to"
-            />
-            <select className="options"
-                onChange={ distanceChange } 
-                value={ searchForm.miles }
-            >
-                <option value="1">1 mi</option>
-                <option value="5">5 mi</option>
-                <option value="10">10 mi</option>
-                <option value="25">25 mi</option>
-                <option value="all">All</option>
-            </select>
-        </div>
-        <div className="options-container">
-            <img className="icon"
-                src={ SortIcon }
-                alt="Sort"
-            />
-            <select className="options"
-                onChange={ sortChange }
-                value={ searchForm.sortBy }
-            >
-                <option value="ratingavg DESC">Rating</option>
-                <option value="distance" >Distance</option>
-                <option value="length">Length</option>
-            </select>
-        </div>
+        <DropDown iconSvg={ DistanceIcon }
+            alt="Distance to"
+            onChange={ distanceChange }
+            value={ searchForm.miles }
+            options={[
+                { value: '1', text: '1 mi'},
+                { value: '5', text: '5 mi'},
+                { value: '10', text: '10 mi'},
+                { value: '25', text: '25 mi'},
+                { value: 'all', text: 'All'}
+            ]}
+        />
+        <DropDown iconSvg={ SortIcon }
+            alt="sort"
+            onChange={ sortChange }
+            value={ searchForm.sortBy }
+            options={[
+                { value: 'ratingavg DESC', text: 'Rating'},
+                { value: 'distance', text: 'Distance'},
+                { value: 'length', text: 'Length'}
+            ]}
+        />
     </div>
     {
         walkResults.map(walk =>
-        <div className="walk-card-container">
-            <WalkCard key={ walk.id }walk={ walk } />
+        <div className="walk-card-container" key={ walk.walkid }>
+            <WalkCard walk={ walk } 
+                onClick={ () => history.push(`/walks/${walk.walkid}`) }
+            />
         </div>
         )
     }
@@ -113,16 +106,21 @@ let mapStateToProps = (state) => ({
     currentLocation: state.currentLocation,
 });
 
+let mapDispatchToProps = (dispatch) => ({
+
+});
+
 export let enhance = compose(
+    withRouter,
     withProps({
-        googleMapURL: `https://maps.googleapis.com/maps/api/js?
-            key=${ googleKey }
-            &v=3.exp&libraries=geometry,drawing,places`,
+        googleMapURL: 'https://maps.googleapis.com/maps/api/js?key=' +
+            googleKey + '&v=3.exp&libraries=geometry,drawing,places',
         loadingElement: <div style={{ height: `100%` }} />,
         containerElement: <div style={{ height: `400px` }} />,
     }),
     connect(
         mapStateToProps,
+        mapDispatchToProps
     ),
     withState('refs', 'updateRefs', {}),
     withState('places', 'updatePlaces', []),
