@@ -7,7 +7,7 @@ import store from './redux/store';
 
 let ui = 
     <Provider store={ store }>
-            <App />
+        <App />
     </Provider>
 
 ReactDOM.render(ui, document.getElementById('root'));

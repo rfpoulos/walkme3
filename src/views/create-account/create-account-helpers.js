@@ -11,7 +11,11 @@ let fetchCreateAccount = (createAccountForm) =>
     })
     .then(res => res.text());
 
-export let createAccount = (createAccountForm, updateUserObject, history) => 
+export let createAccount = (
+    createAccountForm, 
+    updateUserObject, 
+    history
+) => 
     async () => {
         try {
             await fetchCreateAccount(createAccountForm);

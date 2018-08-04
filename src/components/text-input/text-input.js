@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.css';
+import './text-input.css';
 
 export default ({ 
     type, 
@@ -14,8 +14,5 @@ export default ({
         value={ value }
         onChange={ onChange } 
         style={ style }
-        onClick={ (event) => {
-            event.target.focus()
-            event.target.select()
-        }}
+        onClick={ (event) => { event.target.select() } }
     />

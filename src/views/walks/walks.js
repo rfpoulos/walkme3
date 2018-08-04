@@ -11,7 +11,7 @@ import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/Sta
 import TextInput from '../../components/text-input/text-input';
 import { googleKey } from '../../variables';
 import { getWalks } from './walks-helpers';
-import WalkCard from '../../components/walk-card/walk-card';
+import WalkCard from '../../collections/walk-card/walk-card';
 import { connect } from 'react-redux';
 import MapMarker from '../../images/map-marker-alt-solid.svg';
 import IconLeftInput from '../../components/text-input/icon-left';
@@ -19,6 +19,8 @@ import DistanceIcon from '../../images/location-arrow-solid.svg';
 import SortIcon from '../../images/sort-solid.svg';
 import DropDown from '../../components/drop-down/drop-down';
 import { withRouter } from 'react-router-dom';
+import PageTitle from '../../components/page-title/page-title';
+import Autocomplete from '../../collections/autocomplete/autocomplete';
 
 export let Walks = ({
     onSearchBoxMounted,
@@ -38,7 +40,7 @@ export let Walks = ({
     history,
 }) =>
 <div className="location-search">
-    <h2 className="page-title">Find Walking Tours</h2>
+    <PageTitle text='Find Walking Tours' />
     <div className="search-container">
         <StandaloneSearchBox
             ref={ onSearchBoxMounted }
@@ -56,10 +58,9 @@ export let Walks = ({
         </StandaloneSearchBox>
     </div>
     <div className="search-container">
-        <TextInput placeholder="Search by title or guide" />
+        <Autocomplete placeholder="Search by title or guide"
+        />
     </div>
-    <ul className="title-guide-results">
-    </ul>
     <div className="filter-by">
         <input type="checkbox" id="video" value="checked" 
             onChange={(event) => event}/>

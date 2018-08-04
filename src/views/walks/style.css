@@ -34,10 +34,6 @@
     padding-bottom: 1rem;
 }
 
-.page-title {
-    margin: 0 0 1rem 0;
-}
-
 .filter-by {
     display: flex;
     align-items: center;

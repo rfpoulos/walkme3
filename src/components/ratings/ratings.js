@@ -1,61 +1,58 @@
 import React from 'react';
-import './style.css';
+import {
+    ratingsContainer,
+    starContainer,
+    hollowContainer,
+    count,
+    ratingWidth,
+} from './ratings-style';
+import Icon from '../svg-icon/small/small';
 import Star from '../../images/star-solid.svg';
 import StarHollow from '../../images/star-regular.svg';
 
-export default ({ averageRating, ratingsCount }) =>
-    <div className="ratings-container">
-        <div className="ratings-container">
-            <div style={ { 
-                width: `${averageRating}rem`,
-                overflow: 'hidden'
-                } }>
-                <div className="star-container">
-                    <img className="star" 
-                        src={ Star}
+export default ({ 
+    averageRating, 
+    ratingsCount, 
+}) =>
+    <div style={ ratingsContainer }>
+        <div style={ ratingsContainer }>
+            <div style={ ratingWidth(averageRating) }>
+                <div style={ starContainer }>
+                    <Icon src={ Star}
                         alt="1"
                     />
-                    <img className="star"  
-                        src={ Star}
+                    <Icon src={ Star}
                         alt="2"
                     />
-                    <img className="star"  
-                        src={ Star}
+                    <Icon src={ Star}
                         alt="3"
                     />
-                    <img className="star"  
-                        src={ Star}
+                    <Icon src={ Star}
                         alt="4"
                     />
-                    <img className="star"  
-                        src={ Star}
+                    <Icon src={ Star}
                         alt="5"
                     />
                 </div>
             </div>
-            <p className="count"></p>
+            <p style={ count }></p>
         </div>            
-        <div className="hollow-container">
-            <img className="star" 
-                src={ StarHollow }
+        <div style={ hollowContainer }>
+            <Icon src={ StarHollow }
                 alt="1"
             />
-            <img className="star"  
-                src={ StarHollow }
+            <Icon src={ StarHollow }
                 alt="2"
             />
-            <img className="star"  
-                src={ StarHollow }
+            <Icon src={ StarHollow }
                 alt="3"
             />
-            <img className="star"  
-                src={ StarHollow }
+            <Icon src={ StarHollow }
                 alt="4"
             />
-            <img className="star"  
-                src={ StarHollow }
+            <Icon src={ StarHollow }
                 alt="5"
             />
-            <p className="count">{`(${ratingsCount})`}</p>  
+            <p style={ count }>{`(${ratingsCount})`}</p>  
         </div>
     </div>

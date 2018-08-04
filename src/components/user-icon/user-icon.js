@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.css';
+import './user-icon.css';
 
 export default ({ 
     src, 

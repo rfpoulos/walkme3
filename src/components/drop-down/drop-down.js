@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.css';
+import './drop-down.css';
 
 export default ({
     iconSvg, 
