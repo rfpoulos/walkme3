@@ -1,5 +1,9 @@
 import React from 'react';
-import './drop-down.css';
+import Icon from '../svg-icon/medium/medium';
+import {
+    container,
+    options,
+} from './drop-down-style';
 
 export default ({
     iconSvg, 
@@ -8,22 +12,21 @@ export default ({
     value,
     options,
 }) =>
-    <div className="options-container">
-        <img className="options-icon"
-            src={ iconSvg }
+    <div style={ container }>
+        <Icon src={ iconSvg }
             alt={ alt }
         />
         <select className="options"
             onChange={ onChange } 
             value={ value }
         >
-            {
-                options.map((option, i) =>
-                    <option key={i}
-                        value={ option.value }>
-                        { option.text }
-                    </option>
-                )
-            }
+        {
+            options.map((option, i) =>
+                <option key={i}
+                    value={ option.value }>
+                    { option.text }
+                </option>
+            )
+        }
         </select>
     </div>

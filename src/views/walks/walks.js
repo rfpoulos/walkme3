@@ -59,6 +59,7 @@ export let Walks = ({
     </div>
     <div className="search-container">
         <Autocomplete placeholder="Search by title or guide"
+            results={ [] }
         />
     </div>
     <div className="filter-by">
@@ -154,7 +155,7 @@ export let enhance = compose(
                     lng: newPlace[0].geometry.location.lng(),
                     limit: 25,
                 };
-                updateText(newPlace[0].formatted_address)
+                updateText(newPlace[0].formatted_address);
                 updateSearch(newSearch);
                 let results = await getWalks(newSearch);
                 updateWalkResults(results);

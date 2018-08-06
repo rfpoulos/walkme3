@@ -1,5 +1,7 @@
 import React from 'react';
-import './text-input.css';
+import {
+    input,
+} from './text-input-style';
 
 export default ({ 
     type, 
@@ -8,11 +10,10 @@ export default ({
     onChange,
     style,
 }) =>
-    <input className="input"
+    <input style={ input }
         type={ type }
         placeholder={ placeholder }
         value={ value }
         onChange={ onChange } 
-        style={ style }
         onClick={ (event) => { event.target.select() } }
     />

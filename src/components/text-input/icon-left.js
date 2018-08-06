@@ -1,5 +1,9 @@
 import React from 'react';
-import './text-input.css';
+import {
+    container,
+    padding,
+    icon,
+} from './text-input-style';
 
 export default ({ 
     type, 
@@ -11,18 +15,16 @@ export default ({
     alt,
     onClick,
 }) =>
-    <div className="icon-left-container">
+    <div style={ container }>
         <img src={ src }
-            className="input-icon"
+            style={ icon }
             alt={ alt }
             onClick={ onClick }
         />
-        <input className="input padding-left"
+        <input style={ padding }
             type={ type }
             placeholder={ placeholder }
             value={ value }
             onChange={ onChange } 
-            style={ style }
-            onClick={ (event) => event.target.select() }
         />
     </div>

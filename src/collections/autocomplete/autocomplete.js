@@ -3,7 +3,8 @@ import TextInput from '../../components/text-input/text-input';
 import Button from '../../components/button/button';
 import {
     autocomplete,
-    results
+    list,
+    listItem,
 } from './autocomplete-style'
 
 export default ({
@@ -11,6 +12,7 @@ export default ({
     onClick,
     onChange,
     placeholder,
+    results,
 }) =>
     <div style={ autocomplete }>
         <TextInput type="text"
@@ -18,6 +20,15 @@ export default ({
             value={ value }
             onChange={ onChange }
         />
-        <ul style={ results }>
+        <ul style={ list }>
+        {
+            results.map((result, i) =>
+                <li key={ i }
+                    style={ listItem }
+                >
+                    { result }
+                </li>
+            )
+        }
         </ul>
     </div>
