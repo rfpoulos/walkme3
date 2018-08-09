@@ -21,6 +21,7 @@ import { withRouter } from 'react-router-dom';
 import PageTitle from '../../components/page-title/page-title';
 import Autocomplete from '../../collections/autocomplete/autocomplete';
 import FilterOptions from '../../components/filter-options/filter-options';
+import { route } from '../menu/menu-helpers';
 
 export let Walks = ({
     onSearchBoxMounted,
@@ -37,7 +38,9 @@ export let Walks = ({
     currentLocation,
     searchText,
     handleText,
-    route,
+    history,
+    toggleVideo,
+    toggleAudio,
 }) =>
 <div className="location-search">
     <PageTitle text='Find Walking Tours' />
@@ -64,10 +67,16 @@ export let Walks = ({
     </div>
     <div className="search-container">
         <FilterOptions 
-            name='Filter By'
+            name='Walk Has'
             options={[
-                {value: 'Video', onChange: null},
-                {value: 'Audio', onChange: null}
+                {
+                    value: 'Video', 
+                    onChange: toggleVideo, 
+                },
+                {
+                    value: 'Audio', 
+                    onChange: toggleAudio,
+                }
             ]}
         />
     </div>
@@ -101,7 +110,7 @@ export let Walks = ({
             key={ walk.walkid }
         >
             <WalkCard walk={ walk } 
-                onClick={ route(walk) }
+                onClick={ route(history, `walks/${walk.walkid}`) }
             />
         </div>
         )
@@ -137,6 +146,8 @@ export let enhance = compose(
         limit: 25,
         sortBy: 'ratingavg DESC',
         miles: 5,
+        audio: false,
+        video: false,
     }),
     withState('walkResults', 'updateWalkResults', []),
     withHandlers({
@@ -219,10 +230,32 @@ export let enhance = compose(
         handleText: ({ updateText }) =>
             event => updateText(event.target.value)
         ,
-        route: ({ 
-            history,
-        }) => (walk) => () =>
-            history.push(`/walks/${walk.walkid}`)
+        toggleVideo: ({ 
+            searchForm,
+            updateSearch,
+            updateWalkResults,
+        }) => async (event) => {
+            let newSearch = {
+                ...searchForm,
+                video: event.target.checked,
+            }
+            updateSearch(newSearch);
+            let results = await getWalks(newSearch);
+            updateWalkResults(results);
+        },
+        toggleAudio: ({ 
+            searchForm,
+            updateSearch,
+            updateWalkResults,
+        }) => async (event) => {
+            let newSearch = {
+                ...searchForm,
+                audio: event.target.checked,
+            }
+            updateSearch(newSearch);
+            let results = await getWalks(newSearch);
+            updateWalkResults(results);
+        },
     }),
     withScriptjs  
 );

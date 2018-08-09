@@ -15,7 +15,7 @@ export default ({
     <div style={ optionsContainer }>
     {
         options.map((option, i) =>
-            <div key={ i }
+            <form key={ i }
                 style={ optionContainer }
             >
                 <label htmlFor={ option.value }>
@@ -25,7 +25,7 @@ export default ({
                     id={ option.value }
                     onChange={ option.onChange }
                 />
-            </div>   
+            </form>   
     )}
     </div>
 </div>
