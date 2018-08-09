@@ -8,7 +8,6 @@ import {
 } from 'recompose';
 import { withScriptjs } from 'react-google-maps';
 import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/StandaloneSearchBox';
-import TextInput from '../../components/text-input/text-input';
 import { googleKey } from '../../variables';
 import { getWalks } from './walks-helpers';
 import WalkCard from '../../collections/walk-card/walk-card';
@@ -21,6 +20,7 @@ import DropDown from '../../components/drop-down/drop-down';
 import { withRouter } from 'react-router-dom';
 import PageTitle from '../../components/page-title/page-title';
 import Autocomplete from '../../collections/autocomplete/autocomplete';
+import FilterOptions from '../../components/filter-options/filter-options';
 
 export let Walks = ({
     onSearchBoxMounted,
@@ -37,7 +37,7 @@ export let Walks = ({
     currentLocation,
     searchText,
     handleText,
-    history,
+    route,
 }) =>
 <div className="location-search">
     <PageTitle text='Find Walking Tours' />
@@ -58,16 +58,18 @@ export let Walks = ({
         </StandaloneSearchBox>
     </div>
     <div className="search-container">
-        <Autocomplete placeholder="Search by title or guide"
-            results={ [] }
+        <Autocomplete results={ [] }
+            placeholder="Search by title or guide"
         />
     </div>
-    <div className="filter-by">
-        <input type="checkbox" id="video" value="checked" 
-            onChange={(event) => event}/>
-        <label htmlFor="video">Video</label>
-        <input type="checkbox" id="audio" value="Has Audio"/>
-        <label htmlFor="audio">Audio</label>
+    <div className="search-container">
+        <FilterOptions 
+            name='Filter By'
+            options={[
+                {value: 'Video', onChange: null},
+                {value: 'Audio', onChange: null}
+            ]}
+        />
     </div>
     <div className="sort-options">
         <DropDown iconSvg={ DistanceIcon }
@@ -95,9 +97,11 @@ export let Walks = ({
     </div>
     {
         walkResults.map(walk =>
-        <div className="walk-card-container" key={ walk.walkid }>
+        <div className="walk-card-container" 
+            key={ walk.walkid }
+        >
             <WalkCard walk={ walk } 
-                onClick={ () => history.push(`/walks/${walk.walkid}`) }
+                onClick={ route(walk) }
             />
         </div>
         )
@@ -136,59 +140,62 @@ export let enhance = compose(
     }),
     withState('walkResults', 'updateWalkResults', []),
     withHandlers({
-        onSearchBoxMounted: ({ refs, updateRefs }) =>
-            searchBox => updateRefs({ ...refs, searchBox }),
+        onSearchBoxMounted: ({ 
+            refs, 
+            updateRefs 
+        }) => searchBox => 
+            updateRefs({ ...refs, searchBox }),
         onPlacesChanged: ({ 
-                refs, 
-                updatePlaces, 
-                updateSearch,
-                searchForm,
-                places,
-                updateWalkResults,
-                updateText 
-            }) => async () => {
-                let newPlace = refs.searchBox.getPlaces();
-                updatePlaces(newPlace);
-                let newSearch = { 
-                    ...searchForm,
-                    lat: newPlace[0].geometry.location.lat(),
-                    lng: newPlace[0].geometry.location.lng(),
-                    limit: 25,
-                };
-                updateText(newPlace[0].formatted_address);
-                updateSearch(newSearch);
+            refs, 
+            updatePlaces, 
+            updateSearch,
+            searchForm,
+            places,
+            updateWalkResults,
+            updateText 
+        }) => async () => {
+            let newPlace = refs.searchBox.getPlaces();
+            updatePlaces(newPlace);
+            let newSearch = { 
+                ...searchForm,
+                lat: newPlace[0].geometry.location.lat(),
+                lng: newPlace[0].geometry.location.lng(),
+                limit: 25,
+            };
+            updateText(newPlace[0].formatted_address);
+            updateSearch(newSearch);
+            let results = await getWalks(newSearch);
+            updateWalkResults(results);
+        },
+        distanceChange: ({ 
+            searchForm, 
+            updateSearch,
+            updateWalkResults,
+        }) => async event => {
+            let newSearch = {
+                ...searchForm,
+                miles: event.target.value
+            };
+            updateSearch(newSearch);
+            if (newSearch.lat) {
                 let results = await getWalks(newSearch);
                 updateWalkResults(results);
-            },
-        distanceChange: ({ 
-                searchForm, 
-                updateSearch,
-                updateWalkResults,
-            }) => async event => {
-                let newSearch = {
-                    ...searchForm,
-                    miles: event.target.value
-                };
-                updateSearch(newSearch);
-                if (newSearch.lat) {
-                    let results = await getWalks(newSearch);
-                    updateWalkResults(results);
-                }
-            },
+            }
+        },
         sortChange: ({ 
-                searchForm, 
-                updateSearch,
-                updateWalkResults,
+            searchForm, 
+            updateSearch,
+            updateWalkResults,
         }) => async event => {
-                let newSearch = {
-                    ...searchForm,
-                    sortBy: event.target.value
-                };
-                updateSearch(newSearch);
-                if (newSearch.lat) {
-                    let results = await getWalks(newSearch);
-                    updateWalkResults(results);
-                }
+            let newSearch = {
+                ...searchForm,
+                sortBy: event.target.value
+            };
+            updateSearch(newSearch);
+            if (newSearch.lat) {
+                let results = await getWalks(newSearch);
+                updateWalkResults(results);
+            }
         },
         searchCurrentLocation: ({ 
                 searchForm, 
@@ -197,20 +204,25 @@ export let enhance = compose(
                 currentLocation,
                 updateText,
         }) => async event => {
-                if (currentLocation) {
-                    let newSearch = {
-                        ...searchForm,
-                        lat: currentLocation.lat,
-                        lng: currentLocation.lng
-                    };
-                    updateSearch(newSearch);
-                    updateText("Current Location");
-                    let results = await getWalks(newSearch);
-                    updateWalkResults(results);
-                }
+            if (currentLocation) {
+                let newSearch = {
+                    ...searchForm,
+                    lat: currentLocation.lat,
+                    lng: currentLocation.lng
+                };
+                updateSearch(newSearch);
+                updateText("Current Location");
+                let results = await getWalks(newSearch);
+                updateWalkResults(results);
+            }
         },
         handleText: ({ updateText }) =>
             event => updateText(event.target.value)
+        ,
+        route: ({ 
+            history,
+        }) => (walk) => () =>
+            history.push(`/walks/${walk.walkid}`)
     }),
     withScriptjs  
 );

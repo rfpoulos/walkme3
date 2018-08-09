@@ -1,6 +1,5 @@
 import React from 'react';
 import TextInput from '../../components/text-input/text-input';
-import Button from '../../components/button/button';
 import {
     autocomplete,
     list,
