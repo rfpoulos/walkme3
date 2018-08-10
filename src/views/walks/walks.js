@@ -5,11 +5,16 @@ import {
     withProps, 
     withState,
     withHandlers,
+    mapPropsStream,
+    setObservableConfig,
 } from 'recompose';
 import { withScriptjs } from 'react-google-maps';
 import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/StandaloneSearchBox';
 import { googleKey } from '../../variables';
-import { getWalks } from './walks-helpers';
+import { 
+    getWalks,
+    getTitleOrGuide, 
+} from './walks-helpers';
 import WalkCard from '../../collections/walk-card/walk-card';
 import { connect } from 'react-redux';
 import MapMarker from '../../images/map-marker-alt-solid.svg';
@@ -22,6 +27,10 @@ import PageTitle from '../../components/page-title/page-title';
 import Autocomplete from '../../collections/autocomplete/autocomplete';
 import FilterOptions from '../../components/filter-options/filter-options';
 import { route } from '../menu/menu-helpers';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+import rxjsconfig from 'recompose/rxjsObservableConfig'
+setObservableConfig(rxjsconfig)
 
 export let Walks = ({
     onSearchBoxMounted,
@@ -41,6 +50,9 @@ export let Walks = ({
     history,
     toggleVideo,
     toggleAudio,
+    titleGuideSearch, 
+    titleGuideResults, 
+    titleGuideQuery,
 }) =>
 <div className="location-search">
     <PageTitle text='Find Walking Tours' />
@@ -61,7 +73,9 @@ export let Walks = ({
         </StandaloneSearchBox>
     </div>
     <div className="search-container">
-        <Autocomplete results={ [] }
+        <Autocomplete results={ titleGuideResults }
+            onChange={ (event) => titleGuideSearch(event.target.value) }
+            value={ titleGuideQuery }
             placeholder="Search by title or guide"
         />
     </div>
@@ -69,14 +83,8 @@ export let Walks = ({
         <FilterOptions 
             name='Must Have'
             options={[
-                {
-                    value: 'Video', 
-                    onChange: toggleVideo, 
-                },
-                {
-                    value: 'Audio', 
-                    onChange: toggleAudio,
-                }
+                { value: 'Video', onChange: toggleVideo },
+                { value: 'Audio', onChange: toggleAudio }
             ]}
         />
     </div>
@@ -126,6 +134,29 @@ let mapDispatchToProps = (dispatch) => ({
 });
 
 export let enhance = compose(
+    mapPropsStream(props$ => {
+        let titleGuideSearch$ = new Subject();
+        let titleGuideSearch = v => titleGuideSearch$.next(v);
+    
+        let titleGuideQuery$ =  titleGuideSearch$
+            .startWith('');
+    
+        let titleGuideResults$ = titleGuideQuery$
+            .debounceTime(250)
+            .distinctUntilChanged()
+            .switchMap(query => query ? 
+                getTitleOrGuide(query) : 
+                Promise.resolve([])
+            )
+            .map(results => results.map(result => result.result));
+    
+    
+        return props$.combineLatest(titleGuideResults$, titleGuideQuery$,
+          (props, titleGuideResults, titleGuideQuery) => ({
+            ...props, titleGuideSearch, titleGuideResults, titleGuideQuery,
+          })
+        )}
+      ),
     withRouter,
     withProps({
         googleMapURL: 'https://maps.googleapis.com/maps/api/js?key=' +
@@ -163,7 +194,7 @@ export let enhance = compose(
             searchForm,
             places,
             updateWalkResults,
-            updateText 
+            updateText, 
         }) => async () => {
             let newPlace = refs.searchBox.getPlaces();
             updatePlaces(newPlace);

@@ -1,17 +1,22 @@
 export let autocomplete = ({
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
     width: '100%',
+    alignItems: 'center',
 });
 
 export let list = ({
-    padding: '2.1rem 0 0 0',
+    padding: '0',
     margin: 0,
     position: 'absolute',
     listStyleType: 'none',
     width: '100%',
     maxWidth: '20rem',
+});
+
+export let listContainer = ({
+    display: 'flex',
+    justifyContent: 'center',
 });
 
 export let listItem = ({

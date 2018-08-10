@@ -4,6 +4,7 @@ import {
     autocomplete,
     list,
     listItem,
+    listContainer,
 } from './autocomplete-style'
 
 export default ({
@@ -19,15 +20,17 @@ export default ({
             value={ value }
             onChange={ onChange }
         />
-        <ul style={ list }>
-        {
-            results.map((result, i) =>
-                <li key={ i }
-                    style={ listItem }
-                >
-                    { result }
-                </li>
-            )
-        }
-        </ul>
+        <div style={ listContainer }>
+            <ul style={ list }>
+            {
+                results.map((result, i) =>
+                    <li key={ i }
+                        style={ listItem }
+                    >
+                        { result }
+                    </li>
+                )
+            }
+            </ul>
+        </div>
     </div>
