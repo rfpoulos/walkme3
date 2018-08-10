@@ -5,7 +5,9 @@ export let getWalks = ({
     lng, 
     miles, 
     limit, 
-    sortBy, 
+    sortBy,
+    audio,
+    video,
 }) =>
     fetch(server +
         'getresultswithindistance/' +
@@ -13,7 +15,9 @@ export let getWalks = ({
         lng + '/' +
         miles + '/' +
         limit + '/' +
-        sortBy, {
+        sortBy + '/' +
+        audio + '/' +
+        video, {
             method: 'GET',
             mode: 'cors',
             headers: new Headers ({

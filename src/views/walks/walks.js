@@ -67,7 +67,7 @@ export let Walks = ({
     </div>
     <div className="search-container">
         <FilterOptions 
-            name='Walk Has'
+            name='Must Have'
             options={[
                 {
                     value: 'Video', 
