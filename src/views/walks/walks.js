@@ -13,7 +13,8 @@ import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/Sta
 import { googleKey } from '../../variables';
 import { 
     getWalks,
-    getTitleOrGuide, 
+    getTitleOrGuide,
+    getResultClick,
 } from './walks-helpers';
 import WalkCard from '../../collections/walk-card/walk-card';
 import { connect } from 'react-redux';
@@ -53,6 +54,8 @@ export let Walks = ({
     titleGuideSearch, 
     titleGuideResults, 
     titleGuideQuery,
+    titleGuideClick,
+    resultOnClick,
 }) =>
 <div className="location-search">
     <PageTitle text='Find Walking Tours' />
@@ -74,9 +77,11 @@ export let Walks = ({
     </div>
     <div className="search-container">
         <Autocomplete results={ titleGuideResults }
-            onChange={ (event) => titleGuideSearch(event.target.value) }
+            onChange={ (event) => 
+                titleGuideSearch(event.target.value) }
             value={ titleGuideQuery }
             placeholder="Search by title or guide"
+            resultOnClick={ resultOnClick }
         />
     </div>
     <div className="search-container">
@@ -151,9 +156,17 @@ export let enhance = compose(
             .map(results => results.map(result => result.result));
     
     
-        return props$.combineLatest(titleGuideResults$, titleGuideQuery$,
-          (props, titleGuideResults, titleGuideQuery) => ({
-            ...props, titleGuideSearch, titleGuideResults, titleGuideQuery,
+        return props$.combineLatest(
+            titleGuideResults$, 
+            titleGuideQuery$,
+            (   props, 
+                titleGuideResults, 
+                titleGuideQuery
+            ) => ({
+                ...props, 
+                titleGuideSearch, 
+                titleGuideResults, 
+                titleGuideQuery,
           })
         )}
       ),
@@ -287,6 +300,20 @@ export let enhance = compose(
             let results = await getWalks(newSearch);
             updateWalkResults(results);
         },
+        resultOnClick: ({
+            updateWalkResults,
+            searchForm,
+            titleGuideSearch,
+        }) => (result) => async () => {
+            let search = {
+                lat: searchForm.lat,
+                lng: searchForm.lng,
+                query: result
+            }
+            let results = await getResultClick(search);
+            updateWalkResults(results);
+            titleGuideSearch('')
+        }
     }),
     withScriptjs  
 );

@@ -37,3 +37,21 @@ export let getTitleOrGuide = (query) =>
                 "authorization": localStorage.getItem('token')
             })
     }).then(res => res.json())
+
+export let getResultClick = ({
+    query,
+    lat,
+    lng,
+}) =>
+    fetch(server +
+        'getresultclick/' +
+        query + '/' +
+        lat + '/' +
+        lng, {
+            method: 'GET',
+            mode: 'cors',
+            headers: new Headers ({
+                "Content-Type": "application/json",
+                "authorization": localStorage.getItem('token')
+            })
+    }).then(res => res.json())

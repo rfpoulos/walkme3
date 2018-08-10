@@ -9,7 +9,7 @@ import {
 
 export default ({
     value, 
-    onClick,
+    resultOnClick,
     onChange,
     placeholder,
     results,
@@ -26,6 +26,7 @@ export default ({
                 results.map((result, i) =>
                     <li key={ i }
                         style={ listItem }
+                        onClick={ resultOnClick(result) }
                     >
                         { result }
                     </li>
