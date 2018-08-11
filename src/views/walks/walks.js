@@ -28,7 +28,6 @@ import Autocomplete from '../../collections/autocomplete/autocomplete';
 import FilterOptions from '../../components/filter-options/filter-options';
 import { route } from '../menu/menu-helpers';
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
 import { 
     container,
     input,

@@ -6,12 +6,12 @@ export let autocomplete = ({
 });
 
 export let list = ({
-    padding: '0',
+    width: '90%',
+    maxWidth: '20rem',
+    padding: 0,
     margin: 0,
     position: 'absolute',
     listStyleType: 'none',
-    width: '100%',
-    maxWidth: '20rem',
 });
 
 export let listContainer = ({
@@ -22,4 +22,5 @@ export let listContainer = ({
 export let listItem = ({
     border: '1px solid black',
     backgroundColor: 'white',
+    padding: '.5rem',
 })

@@ -8,4 +8,5 @@ export let container = ({
 export let input = ({
     width: '100%',
     paddingBottom: '1rem',
+    textAlign: 'center',
 });
