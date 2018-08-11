@@ -15,12 +15,12 @@ import Menu from './views/menu/menu'
 
 let App = () =>
   <Router>
-    <div className="app">
+    <div>
       <Location />
       <SignInRedirect />
       <Menu />
       <Header />
-      <div className="router">
+      <div style={ {paddingTop: '4rem'} }>
         <Switch>
           <Route path="/signin" component={ SignIn } />
           <Route path="/createaccount" component={ CreateAccount } />

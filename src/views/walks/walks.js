@@ -1,5 +1,4 @@
 import React from 'react';
-import './style.css';
 import { 
     compose, 
     withProps, 
@@ -30,7 +29,13 @@ import FilterOptions from '../../components/filter-options/filter-options';
 import { route } from '../menu/menu-helpers';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import rxjsconfig from 'recompose/rxjsObservableConfig'
+import { 
+    container,
+    input,
+    sort,
+    walkContainer,
+} from './walks-style';
+import rxjsconfig from 'recompose/rxjsObservableConfig';
 setObservableConfig(rxjsconfig)
 
 export let Walks = ({
@@ -57,9 +62,9 @@ export let Walks = ({
     titleGuideClick,
     resultOnClick,
 }) =>
-<div className="location-search">
+<div style={ container }>
     <PageTitle text='Find Walking Tours' />
-    <div className="search-container">
+    <div style={ input }>
         <StandaloneSearchBox
             ref={ onSearchBoxMounted }
             bounds={ bounds }
@@ -75,7 +80,7 @@ export let Walks = ({
             />
         </StandaloneSearchBox>
     </div>
-    <div className="search-container">
+    <div style={ input }>
         <Autocomplete results={ titleGuideResults }
             onChange={ (event) => 
                 titleGuideSearch(event.target.value) }
@@ -84,7 +89,7 @@ export let Walks = ({
             resultOnClick={ resultOnClick }
         />
     </div>
-    <div className="search-container">
+    <div style={ input }>
         <FilterOptions 
             name='Must Have'
             options={[
@@ -93,7 +98,7 @@ export let Walks = ({
             ]}
         />
     </div>
-    <div className="sort-options">
+    <div style={ sort }>
         <DropDown iconSvg={ DistanceIcon }
             alt="Distance to"
             onChange={ distanceChange }
@@ -119,7 +124,7 @@ export let Walks = ({
     </div>
     {
         walkResults.map(walk =>
-        <div className="walk-card-container" 
+        <div style={ walkContainer }
             key={ walk.walkid }
         >
             <WalkCard walk={ walk } 

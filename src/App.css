@@ -9,21 +9,6 @@
   font-family: 'Helvetica Neue', 'san-serif';
 }
 
-.app {
-  display: flex;
-  flex-direction: column;
-}
-
-.false {
-  display: none;
-}
-
-.router {
-  width: 100%;
-  height: 100%;
-  margin-top: 4rem;
-}
-
 .options {
   width: 6rem;
   padding: 5px;

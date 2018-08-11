@@ -1,5 +1,4 @@
 import React from 'react';
-import './style.css';
 import { signIn } from './sign-in-helpers';
 import { connect } from 'react-redux';
 import { 
@@ -14,6 +13,10 @@ import {
 import { updateUserObject } from '../../redux/actions';
 import TextInput from '../../components/text-input/text-input';
 import Button from '../../components/button/button';
+import {
+    container,
+    input,
+} from './sign-in-style';
 
 export let SignIn = ({ 
     signInForm, 
@@ -22,15 +25,15 @@ export let SignIn = ({
     updateUserObject,
     history,
 }) =>
-    <div className="sign-in">
-        <div className="sign-in-spacing">        
+    <div style={ container }>
+        <div style={ input }>        
             <TextInput type="text" 
                 placeholder="Email or Username"
                 value={ signInForm.identifier }
                 onChange={ handleEmail }
             />
         </div>
-        <div className="sign-in-spacing">        
+        <div style={ input }>        
             <TextInput type="password"
                 placeholder="Password"
                 value={ signInForm.password }

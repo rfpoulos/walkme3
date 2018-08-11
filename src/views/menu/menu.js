@@ -1,5 +1,4 @@
 import React from 'react';
-import './style.css';
 import { withRouter } from 'react-router-dom';
 import { 
     route,
@@ -14,6 +13,11 @@ import { connect } from 'react-redux';
 import { resetState } from '../../redux/actions';
 import UserIcon from '../../components/user-icon/user-icon';
 import { server } from '../../variables';
+import {
+    container,
+    nav,
+    li,
+} from './menu-style';
 
 export let Menu = ({ 
     isOnline, 
@@ -23,43 +27,33 @@ export let Menu = ({
     userObject,
     menuOpen,
 }) =>
-    <nav onClick={ handleToggle } className="menu">
-        {
-            userObject && <UserIcon 
-                src={ server + userObject.thumbnail } 
-                onClick={ handleToggle } 
-                alt="Open menu / user image"
-            />
-        }
-        {
-            isOnline && userObject && menuOpen &&
-            <ul className="nav-list">
-                <li onClick={ route(history, 'walks') }>
+    userObject &&
+    <nav onClick={ handleToggle } style={ container }>
+        <UserIcon 
+            src={ server + userObject.thumbnail } 
+            onClick={ handleToggle } 
+            alt="Open menu / user image"
+        />
+        {   menuOpen &&
+            <ul style={ nav }>
+                <li style={ li }
+                    onClick={ route(history, 'walks') }>
                     Find Walk
                 </li>
-                <li onClick={ route(history,'addwalk') }>
+                <li style={ li }
+                    onClick={ route(history,'addwalk') }>
                     Add/Edit Walks
                 </li>
-                <li onClick={ route(history, 'offlinewalks') }>
+                <li style={ li }
+                    onClick={ route(history, 'offlinewalks') }>
                     Offline Walks
                 </li>
-                <li onClick={ route(history, 'profile') }>
+                <li style={ li }
+                    onClick={ route(history, 'profile') }>
                     Profile
                 </li>
-                <li onClick={ logout(history, resetState) }>
-                    Logout
-                </li>
-            </ul>
-        }{
-            !isOnline &&
-            <ul className="nav-list">
-                <li>
-                    Offline Walks
-                </li>
-                <li>
-                    Profile
-                </li>
-                <li>
+                <li style={ li }
+                    onClick={ logout(history, resetState) }>
                     Logout
                 </li>
             </ul>

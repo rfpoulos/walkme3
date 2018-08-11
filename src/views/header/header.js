@@ -1,9 +1,9 @@
 import React from 'react';
-import './style.css';
-import Logo from '../../components/logo/logo'
+import Logo from '../../components/logo/logo';
+import { header } from './header-style';
 
 export let Header = () =>
-    <header className="header">
+    <header style={ header }>
         <Logo />
     </header>
 
