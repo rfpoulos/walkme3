@@ -20,21 +20,21 @@ import {
 } from './menu-style';
 
 export let Menu = ({ 
-    isOnline, 
     history,
     resetState,
     handleToggle,
     userObject,
     menuOpen,
 }) =>
-    userObject &&
+    userObject && 
     <nav onClick={ handleToggle } style={ container }>
         <UserIcon 
             src={ server + userObject.thumbnail } 
             onClick={ handleToggle } 
             alt="Open menu / user image"
         />
-        {   menuOpen &&
+        {
+            menuOpen && userObject &&
             <ul style={ nav }>
                 <li style={ li }
                     onClick={ route(history, 'walks') }>

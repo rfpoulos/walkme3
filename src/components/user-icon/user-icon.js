@@ -1,13 +1,15 @@
 import React from 'react';
-import './user-icon.css';
-
+import {
+    container,
+    icon,
+} from './user-icon-style';
 export default ({ 
     src, 
     alt, 
     onClick, 
 }) =>
-    <div className="user-icon-container">
-        <img className="user-icon"
+    <div style={ container }>
+        <img style={ icon }
             src={ src }
             alt={ alt }
             onClick={ onClick }

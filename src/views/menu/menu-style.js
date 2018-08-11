@@ -1,14 +1,12 @@
 export let container = ({
-    height: '100%',
-    width: '100%',
     position: 'fixed',
     margin: '.75rem',
     zIndex: 5,
 });
 
 export let nav = ({
-    height: '100%',
-    width: '100%',
+    height: '100vh',
+    width: '100vw',
     margin: '.75rem -.75rem -.75rem -.75rem',
     padding: '.25rem 0 0 0',
     listStyleType: 'none',
