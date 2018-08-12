@@ -1,4 +1,11 @@
-import { server } from '../../variables';
+import { 
+    server, 
+    googleKey, 
+} from '../../variables';
+const googleMapsClient = require('@google/maps').createClient({
+    key: googleKey,
+    Promise: Promise
+  });
 
 export let getWalks = ({ 
     lat, 
@@ -55,3 +62,9 @@ export let getResultClick = ({
                 "authorization": localStorage.getItem('token')
             })
     }).then(res => res.json())
+
+export let googlePlaces = (query) =>
+    googleMapsClient.placesQueryAutoComplete({
+        input: query,
+    }).asPromise()
+    .then(results => results.json.predictions)

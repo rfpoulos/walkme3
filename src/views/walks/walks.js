@@ -1,19 +1,16 @@
 import React from 'react';
 import { 
     compose, 
-    withProps, 
     withState,
     withHandlers,
     mapPropsStream,
     setObservableConfig,
 } from 'recompose';
-import { withScriptjs } from 'react-google-maps';
-import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/StandaloneSearchBox';
-import { googleKey } from '../../variables';
 import { 
     getWalks,
     getTitleOrGuide,
     getResultClick,
+    googlePlaces,
 } from './walks-helpers';
 import WalkCard from '../../collections/walk-card/walk-card';
 import { connect } from 'react-redux';
@@ -38,10 +35,6 @@ import rxjsconfig from 'recompose/rxjsObservableConfig';
 setObservableConfig(rxjsconfig)
 
 export let Walks = ({
-    onSearchBoxMounted,
-    bounds,
-    onPlacesChanged,
-    places,
     searchForm,
     results,
     walkResults,
@@ -60,24 +53,21 @@ export let Walks = ({
     titleGuideQuery,
     titleGuideClick,
     resultOnClick,
+    placesResults,
+    placesSearch,
+    placesQuery,
+    clickPlace,
 }) =>
 <div style={ container }>
     <PageTitle text='Find Walking Tours' />
     <div style={ input }>
-        <StandaloneSearchBox
-            ref={ onSearchBoxMounted }
-            bounds={ bounds }
-            onPlacesChanged={ onPlacesChanged }
-        >
-            <IconLeftInput 
-                src={ MapMarker }
-                value={ searchText }
-                onChange={ handleText }
-                placeholder="Street address, city, state"
-                alt="Use current location"
-                onClick={ searchCurrentLocation }
-            />
-        </StandaloneSearchBox>
+        <Autocomplete results={ placesResults }
+            onChange={ (event) => 
+                placesSearch(event.target.value) }
+            value={ placesQuery }
+            placeholder="Enter Location"
+            resultOnClick={ () => () => console.log('clicked') }
+        />        
     </div>
     <div style={ input }>
         <Autocomplete results={ titleGuideResults }
@@ -174,19 +164,41 @@ export let enhance = compose(
           })
         )}
       ),
+      mapPropsStream(props$ => {
+        let placesSearch$ = new Subject();
+        let placesSearch = v => placesSearch$.next(v);
+    
+        let placesQuery$ =  placesSearch$
+            .startWith('');
+    
+        let placesResults$ = placesQuery$
+            .debounceTime(250)
+            .distinctUntilChanged()
+            .switchMap(query => query ? 
+                googlePlaces(query) : 
+                Promise.resolve([])
+            )
+            .map(results => results.map(result => result.description));
+    
+        return props$.combineLatest(
+            placesResults$, 
+            placesQuery$,
+            (   props, 
+                placesResults, 
+                placesQuery
+            ) => ({
+                ...props, 
+                placesSearch, 
+                placesResults, 
+                placesQuery,
+          })
+        )}
+      ),
     withRouter,
-    withProps({
-        googleMapURL: 'https://maps.googleapis.com/maps/api/js?key=' +
-            googleKey + '&v=3.exp&libraries=geometry,drawing,places',
-        loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: <div style={{ height: `400px` }} />,
-    }),
     connect(
         mapStateToProps,
         mapDispatchToProps
     ),
-    withState('refs', 'updateRefs', {}),
-    withState('places', 'updatePlaces', []),
     withState('searchText', 'updateText', ''),
     withState('searchForm', 'updateSearch', {
         lat: null,
@@ -199,33 +211,6 @@ export let enhance = compose(
     }),
     withState('walkResults', 'updateWalkResults', []),
     withHandlers({
-        onSearchBoxMounted: ({ 
-            refs, 
-            updateRefs 
-        }) => searchBox => 
-            updateRefs({ ...refs, searchBox }),
-        onPlacesChanged: ({ 
-            refs, 
-            updatePlaces, 
-            updateSearch,
-            searchForm,
-            places,
-            updateWalkResults,
-            updateText, 
-        }) => async () => {
-            let newPlace = refs.searchBox.getPlaces();
-            updatePlaces(newPlace);
-            let newSearch = { 
-                ...searchForm,
-                lat: newPlace[0].geometry.location.lat(),
-                lng: newPlace[0].geometry.location.lng(),
-                limit: 25,
-            };
-            updateText(newPlace[0].formatted_address);
-            updateSearch(newSearch);
-            let results = await getWalks(newSearch);
-            updateWalkResults(results);
-        },
         distanceChange: ({ 
             searchForm, 
             updateSearch,
@@ -319,7 +304,6 @@ export let enhance = compose(
             titleGuideSearch('')
         }
     }),
-    withScriptjs  
 );
 
 export default enhance(Walks)
