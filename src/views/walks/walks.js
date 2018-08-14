@@ -141,13 +141,13 @@ export let enhance = compose(
             .startWith('');
     
         let titleGuideResults$ = titleGuideQuery$
-            .debounceTime(250)
+            .debounceTime(500)
             .distinctUntilChanged()
             .switchMap(query => query ? 
                 getTitleOrGuide(query) : 
                 Promise.resolve([])
             )
-            .map(results => results.map(result => result.result));
+            .map(results => results.map(result => ({ text: result.result })));
     
     
         return props$.combineLatest(
@@ -165,6 +165,7 @@ export let enhance = compose(
         )}
       ),
       mapPropsStream(props$ => {
+        let sessionToken = Math.floor((Math.random() * 10000000) + 1).toString();
         let placesSearch$ = new Subject();
         let placesSearch = v => placesSearch$.next(v);
     
@@ -172,13 +173,16 @@ export let enhance = compose(
             .startWith('');
     
         let placesResults$ = placesQuery$
-            .debounceTime(250)
+            .debounceTime(500)
             .distinctUntilChanged()
             .switchMap(query => query ? 
-                googlePlaces(query) : 
+                googlePlaces(query, sessionToken) : 
                 Promise.resolve([])
             )
-            .map(results => results.map(result => result.description));
+            .map(results => results.map(result => ({ 
+                text: result.description,
+                place_id: result.place_id,
+            })));
     
         return props$.combineLatest(
             placesResults$, 

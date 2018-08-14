@@ -63,7 +63,7 @@ export let getResultClick = ({
             })
     }).then(res => res.json())
 
-export let googlePlaces = (query) =>
+export let googlePlaces = (query, token) =>
     googleMapsClient.placesQueryAutoComplete({
         input: query,
     }).asPromise()

@@ -28,7 +28,7 @@ export default ({
                         style={ listItem }
                         onClick={ resultOnClick(result) }
                     >
-                        { result }
+                        { result.text }
                     </li>
                 )
             }
