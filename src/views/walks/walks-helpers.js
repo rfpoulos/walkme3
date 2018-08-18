@@ -45,7 +45,7 @@ export let getTitleOrGuide = (query) =>
             })
     }).then(res => res.json())
 
-export let getResultClick = ({
+export let getTitleGuideClick = ({
     query,
     lat,
     lng,
@@ -63,8 +63,16 @@ export let getResultClick = ({
             })
     }).then(res => res.json())
 
-export let googlePlaces = (query, token) =>
+export let googlePlacesAutocomplete = (query) =>
     googleMapsClient.placesQueryAutoComplete({
         input: query,
     }).asPromise()
     .then(results => results.json.predictions)
+
+export let googlePlacesDetail = (placeId) =>
+    googleMapsClient.place({
+        placeid: placeId,
+        fields: ['geometry'],
+    }).asPromise()
+    .then(results => results.json.result.geometry.location)
+

@@ -12,6 +12,7 @@ export let list = ({
     margin: 0,
     position: 'absolute',
     listStyleType: 'none',
+    zIndex: '20',
 });
 
 export let listContainer = ({

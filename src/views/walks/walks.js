@@ -9,8 +9,9 @@ import {
 import { 
     getWalks,
     getTitleOrGuide,
-    getResultClick,
-    googlePlaces,
+    getTitleGuideClick,
+    googlePlacesAutocomplete,
+    googlePlacesDetail,
 } from './walks-helpers';
 import WalkCard from '../../collections/walk-card/walk-card';
 import { connect } from 'react-redux';
@@ -55,7 +56,7 @@ export let Walks = ({
     placesResults,
     placesSearch,
     placesQuery,
-    clickPlace,
+    placesClick,
 }) =>
 <div style={ container }>
     <PageTitle text='Find Walking Tours' />
@@ -65,7 +66,7 @@ export let Walks = ({
                 placesSearch(event.target.value) }
             value={ placesQuery }
             placeholder="Enter Location"
-            resultOnClick={ () => () => console.log('clicked') }
+            resultOnClick={ placesClick }
         />        
     </div>
     <div style={ input }>
@@ -146,9 +147,11 @@ export let enhance = compose(
                 getTitleOrGuide(query) : 
                 Promise.resolve([])
             )
-            .map(results => results.map(result => ({ text: result.result })));
-    
-    
+            .map(results => results.map(
+                result => ({ text: result.result })
+                )
+            );
+
         return props$.combineLatest(
             titleGuideResults$, 
             titleGuideQuery$,
@@ -164,7 +167,6 @@ export let enhance = compose(
         )}
       ),
       mapPropsStream(props$ => {
-        let sessionToken = Math.floor((Math.random() * 10000000) + 1).toString();
         let placesSearch$ = new Subject();
         let placesSearch = v => placesSearch$.next(v);
     
@@ -175,12 +177,12 @@ export let enhance = compose(
             .debounceTime(500)
             .distinctUntilChanged()
             .switchMap(query => query ? 
-                googlePlaces(query, sessionToken) : 
+                googlePlacesAutocomplete(query) : 
                 Promise.resolve([])
             )
             .map(results => results.map(result => ({ 
                 text: result.description,
-                place_id: result.place_id,
+                placeId: result.place_id,
             })));
     
         return props$.combineLatest(
@@ -301,11 +303,28 @@ export let enhance = compose(
                 lat: searchForm.lat,
                 lng: searchForm.lng,
                 query: result
-            }
-            let results = await getResultClick(search);
+            };
+            let results = await getTitleGuideClick(search);
             updateWalkResults(results);
             titleGuideSearch('')
-        }
+        },
+        placesClick: ({
+            updateWalkResults,
+            updateSearch,
+            searchForm,
+            placesResults,
+            placesSearch,
+        }) => (result) => async () => {
+            let {lat, lng} = await googlePlacesDetail(result.placeId);
+            let newSearch = {
+                ...searchForm,
+                lat,
+                lng,
+            };
+            updateSearch(newSearch);
+            let results = await getWalks(newSearch);
+            updateWalkResults(results);
+        },
     }),
 );
 
