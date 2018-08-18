@@ -52,7 +52,6 @@ export let Walks = ({
     titleGuideResults, 
     titleGuideQuery,
     titleGuideClick,
-    resultOnClick,
     placesResults,
     placesSearch,
     placesQuery,
@@ -75,7 +74,7 @@ export let Walks = ({
                 titleGuideSearch(event.target.value) }
             value={ titleGuideQuery }
             placeholder="Search by title or guide"
-            resultOnClick={ resultOnClick }
+            resultOnClick={ titleGuideClick }
         />
     </div>
     <div style={ input }>
@@ -293,7 +292,7 @@ export let enhance = compose(
             let results = await getWalks(newSearch);
             updateWalkResults(results);
         },
-        resultOnClick: ({
+        titleGuideClick: ({
             updateWalkResults,
             searchForm,
             titleGuideSearch,
