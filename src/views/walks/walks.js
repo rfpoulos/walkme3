@@ -180,10 +180,14 @@ export let enhance = compose(
                 googlePlacesAutocomplete(query) : 
                 Promise.resolve([])
             )
-            .map(results => results.map(result => ({ 
-                text: result.description,
-                placeId: result.place_id,
-            })));
+            .map(results => {
+                    let filteredResults = results.filter(result => result.place_id);
+                    return filteredResults.map(result => ({
+                        text: result.description,
+                        placeId: result.place_id,
+                    }))
+                }
+            );
     
         return props$.combineLatest(
             placesResults$, 
