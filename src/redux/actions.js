@@ -1,7 +1,6 @@
 export const initialState = {
     currentLocation: null,
     userObject: null,
-    isOnline: true,
 }
 
 const UPDATE_CURRENT_LOCATION = "UPDATE_CURRENT_LOCATION";

@@ -23,5 +23,5 @@ export let listContainer = ({
 export let listItem = ({
     border: '1px solid black',
     backgroundColor: 'white',
-    padding: '.5rem',
+    padding: '.25rem',
 })

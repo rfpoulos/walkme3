@@ -9,6 +9,8 @@ export default ({
     value, 
     onChange,
     style,
+    onFocus,
+    onBlur,
 }) =>
     <input style={ input }
         type={ type }
@@ -16,4 +18,6 @@ export default ({
         value={ value }
         onChange={ onChange } 
         onClick={ (event) => { event.target.select() } }
+        onFocus={ onFocus }
+        onBlur={ onBlur }
     />

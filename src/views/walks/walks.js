@@ -45,7 +45,6 @@ export let Walks = ({
     sortChange,
     searchCurrentLocation,
     currentLocation,
-    searchText,
     handleText,
     history,
     toggleVideo,
@@ -150,7 +149,6 @@ export let enhance = compose(
         mapStateToProps,
         mapDispatchToProps
     ),
-    withState('searchText', 'updateText', ''),
     withState('searchForm', 'updateSearch', {
         lat: null,
         lng: null,
@@ -276,7 +274,6 @@ export let enhance = compose(
                     lng: currentLocation.lng
                 };
                 updateSearch(newSearch);
-                updateText("Current Location");
                 let results = await getWalks(newSearch);
                 updateWalkResults(results);
             }
@@ -314,7 +311,7 @@ export let enhance = compose(
             updateWalkResults,
             searchForm,
             titleGuideSearch,
-        }) => (result) => async () => {
+        }) => async (result) => {
             let search = {
                 lat: searchForm.lat,
                 lng: searchForm.lng,
@@ -330,7 +327,7 @@ export let enhance = compose(
             searchForm,
             placesResults,
             placesSearch,
-        }) => (result) => async () => {
+        }) => async (result) => {
             let {lat, lng} = await googlePlacesDetail(result.placeId);
             let newSearch = {
                 ...searchForm,

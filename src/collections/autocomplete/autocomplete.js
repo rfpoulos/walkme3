@@ -26,13 +26,12 @@ export default enhance(({
     showResults,
     updateDisplay,
 }) =>
-    <div style={ autocomplete }
-        onClick={ () => updateDisplay(!showResults) }
-    >
+    <div style={ autocomplete } >
         <TextInput type="text"
             placeholder={ placeholder }
             value={ value }
             onChange={ onChange }
+            onFocus={ () => updateDisplay(true) }
         />
         {   showResults &&
             <div style={ listContainer }>
@@ -41,7 +40,10 @@ export default enhance(({
                     topFixedResults.map((result, i) =>
                         <li key={ i }
                             style={ listItem }
-                            onClick={ result.onClick }
+                            onClick={ () => {
+                                updateDisplay(false)
+                                result.onClick()
+                            } }
                         >
                             { result.text }
                         </li>
@@ -51,7 +53,10 @@ export default enhance(({
                     results.map((result, i) =>
                         <li key={ i }
                             style={ listItem }
-                            onClick={ resultOnClick(result) }
+                            onClick={ () => {
+                                updateDisplay(false)
+                                resultOnClick(result)
+                            } }
                         >
                             { result.text }
                         </li>
@@ -61,7 +66,10 @@ export default enhance(({
                     bottomFixedResults.map((result, i) =>
                         <li key={ i }
                             style={ listItem }
-                            onClick={ result.onClick }
+                            onClick={ () => {
+                                updateDisplay(false)
+                                result.onClick()
+                            } }
                         >
                             { result.text }
                         </li>
