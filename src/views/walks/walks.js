@@ -261,12 +261,13 @@ export let enhance = compose(
             }
         },
         searchCurrentLocation: ({ 
-                searchForm, 
-                updateSearch,
-                updateWalkResults,
-                currentLocation,
-                updateText,
-        }) => async event => {
+            searchForm, 
+            updateSearch,
+            updateWalkResults,
+            currentLocation,
+            updateText,
+            placesSearch,
+        }) => async result => {
             if (currentLocation) {
                 let newSearch = {
                     ...searchForm,
@@ -276,6 +277,7 @@ export let enhance = compose(
                 updateSearch(newSearch);
                 let results = await getWalks(newSearch);
                 updateWalkResults(results);
+                placesSearch(result.text)
             }
         },
         handleText: ({ updateText }) =>
@@ -328,6 +330,7 @@ export let enhance = compose(
             placesResults,
             placesSearch,
         }) => async (result) => {
+            placesSearch(result.text);            
             let {lat, lng} = await googlePlacesDetail(result.placeId);
             let newSearch = {
                 ...searchForm,
