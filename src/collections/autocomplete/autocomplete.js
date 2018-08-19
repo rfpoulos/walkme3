@@ -13,6 +13,8 @@ export default ({
     onChange,
     placeholder,
     results,
+    topFixedResults = [],
+    bottomFixedResults = [],
 }) =>
     <div style={ autocomplete }>
         <TextInput type="text"
@@ -23,10 +25,30 @@ export default ({
         <div style={ listContainer }>
             <ul style={ list }>
             {
+                topFixedResults.map((result, i) =>
+                    <li key={ i }
+                        style={ listItem }
+                        onClick={ result.onClick }
+                    >
+                        { result.text }
+                    </li>
+                )
+            }
+            {
                 results.map((result, i) =>
                     <li key={ i }
                         style={ listItem }
                         onClick={ resultOnClick(result) }
+                    >
+                        { result.text }
+                    </li>
+                )
+            }
+            {
+                bottomFixedResults.map((result, i) =>
+                    <li key={ i }
+                        style={ listItem }
+                        onClick={ result.onClick }
                     >
                         { result.text }
                     </li>

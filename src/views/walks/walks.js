@@ -19,6 +19,7 @@ import MapMarker from '../../images/map-marker-alt-solid.svg';
 import IconLeftInput from '../../components/text-input/icon-left';
 import DistanceIcon from '../../images/location-arrow-solid.svg';
 import SortIcon from '../../images/sort-solid.svg';
+import GoogleAttr from '../../components/google-attr/google-attr';
 import DropDown from '../../components/drop-down/drop-down';
 import { withRouter } from 'react-router-dom';
 import PageTitle from '../../components/page-title/page-title';
@@ -67,6 +68,17 @@ export let Walks = ({
             value={ placesQuery }
             placeholder="Enter Location"
             resultOnClick={ placesClick }
+            topFixedResults={ [
+                {
+                    text: 'Current Location',
+                    onClick: searchCurrentLocation,
+                }
+            ] }
+            bottomFixedResults={ [
+                {
+                    text: <GoogleAttr />
+                }
+            ] }
         />        
     </div>
     <div style={ input }>
@@ -74,7 +86,7 @@ export let Walks = ({
             onChange={ (event) => 
                 titleGuideSearch(event.target.value) }
             value={ titleGuideQuery }
-            placeholder="Search by title or guide"
+            placeholder="Search by Walk Title or Guide"
             resultOnClick={ titleGuideClick }
         />
     </div>
@@ -133,6 +145,22 @@ let mapDispatchToProps = (dispatch) => ({
 });
 
 export let enhance = compose(
+    withRouter,
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    ),
+    withState('searchText', 'updateText', ''),
+    withState('searchForm', 'updateSearch', {
+        lat: null,
+        lng: null,
+        limit: 25,
+        sortBy: 'ratingavg DESC',
+        miles: 5,
+        audio: false,
+        video: false,
+    }),
+    withState('walkResults', 'updateWalkResults', []),
     mapPropsStream(props$ => {
         let titleGuideSearch$ = new Subject();
         let titleGuideSearch = v => titleGuideSearch$.next(v);
@@ -203,22 +231,6 @@ export let enhance = compose(
           })
         )}
       ),
-    withRouter,
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    ),
-    withState('searchText', 'updateText', ''),
-    withState('searchForm', 'updateSearch', {
-        lat: null,
-        lng: null,
-        limit: 25,
-        sortBy: 'ratingavg DESC',
-        miles: 5,
-        audio: false,
-        video: false,
-    }),
-    withState('walkResults', 'updateWalkResults', []),
     withHandlers({
         distanceChange: ({ 
             searchForm, 
