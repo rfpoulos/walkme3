@@ -11,13 +11,14 @@ export default ({
     style,
     onFocus,
     onBlur,
+    onClick,
 }) =>
     <input style={ input }
         type={ type }
         placeholder={ placeholder }
         value={ value }
         onChange={ onChange } 
-        onClick={ (event) => { event.target.select() } }
+        onClick={ onClick }
         onFocus={ onFocus }
         onBlur={ onBlur }
     />

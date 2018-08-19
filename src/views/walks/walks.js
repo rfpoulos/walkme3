@@ -15,8 +15,6 @@ import {
 } from './walks-helpers';
 import WalkCard from '../../collections/walk-card/walk-card';
 import { connect } from 'react-redux';
-import MapMarker from '../../images/map-marker-alt-solid.svg';
-import IconLeftInput from '../../components/text-input/icon-left';
 import DistanceIcon from '../../images/location-arrow-solid.svg';
 import SortIcon from '../../images/sort-solid.svg';
 import GoogleAttr from '../../components/google-attr/google-attr';

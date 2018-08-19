@@ -42,7 +42,9 @@ export default enhance(({
                             style={ listItem }
                             onClick={ () => {
                                 updateDisplay(false)
-                                result.onClick(result)
+                                if (result.onClick) {
+                                    result.onClick(result)
+                                }
                             } }
                         >
                             { result.text }
@@ -68,7 +70,9 @@ export default enhance(({
                             style={ listItem }
                             onClick={ () => {
                                 updateDisplay(false)
-                                result.onClick(result)
+                                if (result.onClick) {
+                                    result.onClick(result)
+                                }
                             } }
                         >
                             { result.text }
