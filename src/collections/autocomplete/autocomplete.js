@@ -6,8 +6,16 @@ import {
     listItem,
     listContainer,
 } from './autocomplete-style'
+import {
+    compose, 
+    withState,
+} from 'recompose'
 
-export default ({
+export let enhance = compose(
+    withState('showResults', 'updateDisplay', false),
+);
+
+export default enhance(({
     value, 
     resultOnClick,
     onChange,
@@ -15,45 +23,51 @@ export default ({
     results,
     topFixedResults = [],
     bottomFixedResults = [],
+    showResults,
+    updateDisplay,
 }) =>
-    <div style={ autocomplete }>
+    <div style={ autocomplete }
+        onClick={ () => updateDisplay(!showResults) }
+    >
         <TextInput type="text"
             placeholder={ placeholder }
             value={ value }
             onChange={ onChange }
         />
-        <div style={ listContainer }>
-            <ul style={ list }>
-            {
-                topFixedResults.map((result, i) =>
-                    <li key={ i }
-                        style={ listItem }
-                        onClick={ result.onClick }
-                    >
-                        { result.text }
-                    </li>
-                )
-            }
-            {
-                results.map((result, i) =>
-                    <li key={ i }
-                        style={ listItem }
-                        onClick={ resultOnClick(result) }
-                    >
-                        { result.text }
-                    </li>
-                )
-            }
-            {
-                bottomFixedResults.map((result, i) =>
-                    <li key={ i }
-                        style={ listItem }
-                        onClick={ result.onClick }
-                    >
-                        { result.text }
-                    </li>
-                )
-            }
-            </ul>
-        </div>
-    </div>
+        {   showResults &&
+            <div style={ listContainer }>
+                <ul style={ list }>
+                {
+                    topFixedResults.map((result, i) =>
+                        <li key={ i }
+                            style={ listItem }
+                            onClick={ result.onClick }
+                        >
+                            { result.text }
+                        </li>
+                    )
+                }
+                {
+                    results.map((result, i) =>
+                        <li key={ i }
+                            style={ listItem }
+                            onClick={ resultOnClick(result) }
+                        >
+                            { result.text }
+                        </li>
+                    )
+                }
+                {
+                    bottomFixedResults.map((result, i) =>
+                        <li key={ i }
+                            style={ listItem }
+                            onClick={ result.onClick }
+                        >
+                            { result.text }
+                        </li>
+                    )
+                }
+                </ul>
+            </div>
+        }
+    </div>)
