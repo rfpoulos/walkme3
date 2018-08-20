@@ -122,13 +122,13 @@ export let Walks = ({
     </div>
     {
         walkResults.map(walk =>
-        <div style={ walkContainer }
-            key={ walk.walkid }
-        >
-            <WalkCard walk={ walk } 
-                onClick={ route(history, `walks/${walk.walkid}`) }
-            />
-        </div>
+            <div style={ walkContainer }
+                key={ walk.walkid }
+            >
+                <WalkCard walk={ walk } 
+                    onClick={ route(history, `walks/${walk.walkid}`) }
+                />
+            </div>
         )
     }
 </div>
@@ -205,7 +205,8 @@ export let enhance = compose(
                 Promise.resolve([])
             )
             .map(results => {
-                    let filteredResults = results.filter(result => result.place_id);
+                    let filteredResults = results
+                        .filter(result => result.place_id);
                     return filteredResults.map(result => ({
                         text: result.description,
                         placeId: result.place_id,
@@ -313,13 +314,13 @@ export let enhance = compose(
             titleGuideSearch,
         }) => async (result) => {
             let search = {
-                lat: searchForm.lat,
-                lng: searchForm.lng,
-                query: result
+                lat: searchForm.lat || 0,
+                lng: searchForm.lng || 0,
+                query: result.text
             };
             let results = await getTitleGuideClick(search);
             updateWalkResults(results);
-            titleGuideSearch('')
+            titleGuideSearch(result.text)
         },
         placesClick: ({
             updateWalkResults,
@@ -329,7 +330,10 @@ export let enhance = compose(
             placesSearch,
         }) => async (result) => {
             placesSearch(result.text);            
-            let {lat, lng} = await googlePlacesDetail(result.placeId);
+            let {
+                lat, 
+                lng
+            } = await googlePlacesDetail(result.placeId);
             let newSearch = {
                 ...searchForm,
                 lat,
