@@ -27,6 +27,11 @@ https://github.com/rfpoulos/walkme3/blob/master/src/fragments/sign-in-redirect/s
 ### Menu Navigation
 ### View/Edit Profile
 ### Search for Walks
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=MbvZAwwe23g
+" target="_blank"><img src="http://img.youtube.com/vi/MbvZAwwe23g/0.jpg" 
+alt="Video of Sign in and Logout" width="240" height="180" border="10" /></a>
+#### View Code
+https://github.com/rfpoulos/walkme3/blob/master/src/views/walks/walks.js
 ### View/Start Walk
 ### Add Walks
 ### Offline
