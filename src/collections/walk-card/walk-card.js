@@ -59,10 +59,12 @@ export default ({
                         />
                     }
                 </div>
-                <IconText src={ LocationArrow }
-                    alt="Distance to"
-                    text={ walk.distance.toFixed(2) + 'mi' }
-                />
+                {   walk.distance &&
+                    <IconText src={ LocationArrow }
+                        alt="Distance to"
+                        text={ walk.distance.toFixed(2) + 'mi' }
+                    />
+                }
             </div>
         </div>
     </div>

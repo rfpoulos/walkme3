@@ -13,6 +13,7 @@ import {
     googlePlacesAutocomplete,
     googlePlacesDetail,
 } from './walks-helpers';
+import { set } from 'lodash/fp'
 import WalkCard from '../../collections/walk-card/walk-card';
 import { connect } from 'react-redux';
 import DistanceIcon from '../../images/location-arrow-solid.svg';
@@ -38,15 +39,11 @@ export let Walks = ({
     searchForm,
     results,
     walkResults,
-    distanceChange,
+    searchChange,
     userLocation,
-    sortChange,
     searchCurrentLocation,
     currentLocation,
-    handleText,
     history,
-    toggleVideo,
-    toggleAudio,
     titleGuideSearch, 
     titleGuideResults, 
     titleGuideQuery,
@@ -91,15 +88,15 @@ export let Walks = ({
         <FilterOptions 
             name='Must Have'
             options={[
-                { value: 'Video', onChange: toggleVideo },
-                { value: 'Audio', onChange: toggleAudio }
+                { value: 'Video', onChange: searchChange('video') },
+                { value: 'Audio', onChange: searchChange('audio') }
             ]}
         />
     </div>
     <div style={ sort }>
         <DropDown iconSvg={ DistanceIcon }
             alt="Distance to"
-            onChange={ distanceChange }
+            onChange={ searchChange('miles') }
             value={ searchForm.miles }
             options={[
                 { value: '1', text: '1 mi'},
@@ -111,7 +108,7 @@ export let Walks = ({
         />
         <DropDown iconSvg={ SortIcon }
             alt="sort"
-            onChange={ sortChange }
+            onChange={ searchChange('sortBy') }
             value={ searchForm.sortBy }
             options={[
                 { value: 'ratingavg DESC', text: 'Rating'},
@@ -229,29 +226,18 @@ export let enhance = compose(
         )}
       ),
     withHandlers({
-        distanceChange: ({ 
+        searchChange: ({ 
             searchForm, 
             updateSearch,
             updateWalkResults,
-        }) => async event => {
+        }) => (category) => async event => {
+            let input;
+            (category === 'video' || category === 'audio') ?
+                input = event.target.checked :
+                input = event.target.value
             let newSearch = {
                 ...searchForm,
-                miles: event.target.value
-            };
-            updateSearch(newSearch);
-            if (newSearch.lat) {
-                let results = await getWalks(newSearch);
-                updateWalkResults(results);
-            }
-        },
-        sortChange: ({ 
-            searchForm, 
-            updateSearch,
-            updateWalkResults,
-        }) => async event => {
-            let newSearch = {
-                ...searchForm,
-                sortBy: event.target.value
+                [category]: input
             };
             updateSearch(newSearch);
             if (newSearch.lat) {
@@ -279,43 +265,14 @@ export let enhance = compose(
                 placesSearch(result.text)
             }
         },
-        handleText: ({ updateText }) =>
-            event => updateText(event.target.value)
-        ,
-        toggleVideo: ({ 
-            searchForm,
-            updateSearch,
-            updateWalkResults,
-        }) => async (event) => {
-            let newSearch = {
-                ...searchForm,
-                video: event.target.checked,
-            }
-            updateSearch(newSearch);
-            let results = await getWalks(newSearch);
-            updateWalkResults(results);
-        },
-        toggleAudio: ({ 
-            searchForm,
-            updateSearch,
-            updateWalkResults,
-        }) => async (event) => {
-            let newSearch = {
-                ...searchForm,
-                audio: event.target.checked,
-            }
-            updateSearch(newSearch);
-            let results = await getWalks(newSearch);
-            updateWalkResults(results);
-        },
         titleGuideClick: ({
             updateWalkResults,
             searchForm,
             titleGuideSearch,
         }) => async (result) => {
             let search = {
-                lat: searchForm.lat || 0,
-                lng: searchForm.lng || 0,
+                lat: searchForm.lat,
+                lng: searchForm.lng,
                 query: result.text
             };
             let results = await getTitleGuideClick(search);
