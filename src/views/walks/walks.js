@@ -13,7 +13,6 @@ import {
     googlePlacesAutocomplete,
     googlePlacesDetail,
 } from './walks-helpers';
-import { set } from 'lodash/fp'
 import WalkCard from '../../collections/walk-card/walk-card';
 import { connect } from 'react-redux';
 import DistanceIcon from '../../images/location-arrow-solid.svg';
@@ -40,9 +39,7 @@ export let Walks = ({
     results,
     walkResults,
     searchChange,
-    userLocation,
     searchCurrentLocation,
-    currentLocation,
     history,
     titleGuideSearch, 
     titleGuideResults, 
@@ -170,9 +167,8 @@ export let enhance = compose(
             )
             .map(results => results.map(
                 result => ({ text: result.result })
-                )
-            );
-
+            )
+        );
         return props$.combineLatest(
             titleGuideResults$, 
             titleGuideQuery$,
@@ -202,15 +198,14 @@ export let enhance = compose(
                 Promise.resolve([])
             )
             .map(results => {
-                    let filteredResults = results
-                        .filter(result => result.place_id);
-                    return filteredResults.map(result => ({
-                        text: result.description,
-                        placeId: result.place_id,
-                    }))
-                }
-            );
-    
+                let filteredResults = results
+                    .filter(result => result.place_id);
+                return filteredResults.map(result => ({
+                    text: result.description,
+                    placeId: result.place_id,
+                }))
+            }
+        );
         return props$.combineLatest(
             placesResults$, 
             placesQuery$,
