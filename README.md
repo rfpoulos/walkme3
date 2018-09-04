@@ -10,6 +10,7 @@ Trello Board: https://trello.com/b/lzYWrjAT/walkme3
 alt="Video of Create Account" width="240" height="180" border="10" /></a>
 ##### View Code
 https://github.com/rfpoulos/walkme3/blob/master/src/views/create-account/create-account.js
+
 ### Sign In/Logout
 ##### Video of sign in and logout
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=T4eL4MyTGp0
@@ -17,6 +18,7 @@ https://github.com/rfpoulos/walkme3/blob/master/src/views/create-account/create-
 alt="Video of Sign in and Logout" width="240" height="180" border="10" /></a>
 ##### View Code
 https://github.com/rfpoulos/walkme3/blob/master/src/views/sign-in/sign-in.js
+
 ### Redirect to Sign-in and Persistant Sign-in
 ##### Video of Redirect
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=AKYyk7SnaHI
@@ -24,24 +26,30 @@ https://github.com/rfpoulos/walkme3/blob/master/src/views/sign-in/sign-in.js
 alt="Video of Sign in and Logout" width="240" height="180" border="10" /></a>
 ##### View Code
 https://github.com/rfpoulos/walkme3/blob/master/src/fragments/sign-in-redirect/sign-in-redirect.js
+
 ### Menu Navigation
+
 ### View/Edit Profile
+
 ### Search for Walks
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=MbvZAwwe23g
 " target="_blank"><img src="http://img.youtube.com/vi/MbvZAwwe23g/0.jpg" 
 alt="Video of Sign in and Logout" width="240" height="180" border="10" /></a>
 #### View Code
 https://github.com/rfpoulos/walkme3/blob/master/src/views/walks/walks.js
-### View/Start Walk
+
+### View/Start Walk (currently in progress)
+
 ### Add Walks
+
 ### Offline
+
 ## Design 
 The general design principle is to only use and manipulate state at the view level. All components within a view should only accept props and have no ablity to manpulate its own props.  There is a redux store, but as opposed to storing all the state for the entire app in the store, only information that is shared amoungst multiple views is going to be stored in redux. This will make the redux store more readable and manageable.
 
 All components are to be styled locally in order to keep styling consistant across the app if components are used in multiple places.
 
 ### Design Flowchart
-
 The goal is to start with the smallest possible solution, and "level-up" as other functionality is needed.
 
 #### Component
