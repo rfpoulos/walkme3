@@ -21,6 +21,8 @@ alt="Video of Sign in and Logout" width="240" height="180" border="10" /></a>
 ##### View Code
 https://github.com/rfpoulos/walkme3/blob/master/src/views/sign-in/sign-in.js
 
+The sign-in form takes an identifier (username or email) plus the password.  The backend then sends back a json web token and user object if valid.  The user object gets stored in the redux store which is the condition the sign-in redirect uses to determine whether the user should be rerouted to the sign-in page.  The menu also appears in the form of the user avatar in the upper left corner.
+
 ### Redirect to Sign-in and Persistant Sign-in
 ##### Video of Redirect
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=AKYyk7SnaHI
