@@ -11,6 +11,8 @@ alt="Video of Create Account" width="240" height="180" border="10" /></a>
 ##### View Code
 https://github.com/rfpoulos/walkme3/blob/master/src/views/create-account/create-account.js
 
+When you create an account, a new user is created in the backend database.  The password is hashed in the database.  On success, the backend sends a json web token with the user id embed in it.  That token is then send to the backend for verification and the user object is returned to the front end and held in redux.
+
 ### Sign In/Logout
 ##### Video of sign in and logout
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=T4eL4MyTGp0
